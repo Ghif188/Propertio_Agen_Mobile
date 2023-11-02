@@ -157,14 +157,23 @@
                     android:layout_height="50dp"
                     android:background="@drawable/bg_edit_text">
                     <Spinner
-                        android:layout_width="wrap_content"
+                        android:id="@+id/spinnerCountry"
+                        android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:layout_gravity="center_vertical"/>
+                    <TextView
+                        android:id="@+id/country_code"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="+62"
+                        android:fontFamily="@font/poppins_reguler"
                         android:layout_gravity="center_vertical"/>
                     <EditText
                         android:layout_weight="3"
                         android:id="@+id/no_telp"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginRight="4dp"
                         android:layout_marginTop="4dp"
@@ -173,7 +182,7 @@
                         android:textSize="15sp"
                         android:layout_gravity="center_vertical"
                         android:paddingHorizontal="15dp"
-                        android:hint="Masukkan Nama Depan Anda"
+                        android:hint="81234567890"
                         android:fontFamily="@font/poppins_reguler"/>
                 </LinearLayout>
             </LinearLayout>
@@ -329,40 +338,41 @@
                 android:orientation="vertical"
                 android:layout_marginBottom="10dp">
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="30dp">
                     <TextView
                         android:fontFamily="@font/poppins_reguler"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tambah Foto Profil"
                         android:layout_marginBottom="5dp"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_btn_grey">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout="@color/red">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_add_circle"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Tambahkan"
+                                android:textSize="16sp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_gravity="center_vertical"
+                                android:textColor="#49454F"
+                                android:fontFamily="@font/poppins_reguler"/>
+                        </LinearLayout>
+                    </RelativeLayout>
                 </LinearLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/bg_btn_grey"
-                    android:layout_marginBottom="30dp">
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout="@color/red">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_add_circle"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Tambahkan"
-                            android:textSize="16sp"
-                            android:layout_marginLeft="5dp"
-                            android:layout_gravity="center_vertical"
-                            android:textColor="#49454F"
-                            android:fontFamily="@font/poppins_reguler"/>
-                    </LinearLayout>
-                </RelativeLayout>
                 <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -12,7 +12,10 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         with(binding){
-            IntentToLogin = Intent()
+            val intentToRegister = Intent(this@Login, Register::class.java)
+            register.setOnClickListener{
+                startActivity(intentToRegister)
+            }
         }
     }
 }

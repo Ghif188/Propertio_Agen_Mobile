@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_dash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Dashboard"
+        android:icon="@drawable/ic_dashboard"/>
+    <item
+        android:id="@+id/nav_proyek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Proyek"
+        android:icon="@drawable/ic_proyek"/>
+    <item
+        android:id="@+id/nav_pesan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Pesan"
+        android:icon="@drawable/ic_pesan"/>
+    <item
+        android:id="@+id/nav_profil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Profil"
+        android:icon="@drawable/ic_profil"/>
+</menu>

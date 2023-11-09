@@ -7,37 +7,37 @@
     tools:context=".ProfilFragment">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0px"
+        android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:scrollbars="none">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.25"/>
+                app:layout_constraintGuide_percent="0.1"/>
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guide_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.3"/>
+                app:layout_constraintGuide_percent="0.07"/>
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guide_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.2"/>
+                app:layout_constraintGuide_percent="0.13"/>
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guide_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.35"/>
+                app:layout_constraintGuide_percent="0.15"/>
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0px"

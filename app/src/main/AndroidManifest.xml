@@ -13,6 +13,38 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".InputVilla"
+            android:exported="false" />
+        <activity
+            android:name=".InputTanah"
+            android:exported="false" />
+        <activity
+            android:name=".InputRumah"
+            android:exported="false" />
+        <activity
+            android:name=".InputRuko"
+            android:exported="false" />
+        <activity
+            android:name=".InputRuangUsaha"
+            android:exported="false" />
+        <activity
+            android:name=".InputPabrik"
+            android:exported="false" />
+        <activity
+            android:name=".InputKondominium"
+            android:exported="false" />
+        <activity
+            android:name=".InputKantor"
+            android:exported="false" />
+        <activity
+            android:name=".InputGudang"
+            android:exported="false" />
+        <activity
+            android:name=".InputApartemen"
+            android:exported="false"
+            android:label="@string/title_activity_input_apartemen"
+            android:theme="@style/Theme.MyApplication" />
+        <activity
             android:name=".ChangePass"
             android:exported="false" />
         <activity

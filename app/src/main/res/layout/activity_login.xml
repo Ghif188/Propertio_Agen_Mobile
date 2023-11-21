@@ -5,152 +5,188 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Register">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_centerInParent="true"
+        android:orientation="vertical"
         android:paddingHorizontal="25dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Propertio"
-            android:textSize="20sp"
-            android:fontFamily="@font/poppins_black"
-            android:layout_gravity="center_horizontal"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Halo Developer"
-            android:textSize="30sp"
-            android:layout_gravity="center"
-            android:fontFamily="@font/poppins_black"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Selamat Datang Kembali"
             android:layout_gravity="center_horizontal"
-            android:fontFamily="@font/poppins_reguler"/>
+            android:fontFamily="@font/poppins_black"
+            android:text="Propertio"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_black"
+            android:text="Halo Developer"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/poppins_reguler"
+            android:text="Selamat Datang Kembali" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/ilus_login"/>
+            android:src="@drawable/ilus_login" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Email"
                     android:layout_marginBottom="5dp"
-                    android:fontFamily="@font/poppins_reguler"/>
+                    android:fontFamily="@font/poppins_reguler"
+                    android:text="Email" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red"
-                    android:text="*"/>
+                    android:text="*"
+                    android:textColor="@color/red" />
             </LinearLayout>
+
             <EditText
                 android:id="@+id/email"
-                android:inputType="textEmailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/bg_edit_text"
-                android:textSize="15sp"
-                android:paddingHorizontal="15dp"
+                android:fontFamily="@font/poppins_reguler"
                 android:hint="Masukkan Email Anda"
-                android:fontFamily="@font/poppins_reguler"/>
+                android:inputType="textEmailAddress"
+                android:paddingHorizontal="15dp"
+                android:textSize="15sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kata Sandi"
                     android:layout_marginBottom="5dp"
-                    android:fontFamily="@font/poppins_reguler"/>
+                    android:fontFamily="@font/poppins_reguler"
+                    android:text="Kata Sandi" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red"
-                    android:text="*"/>
+                    android:text="*"
+                    android:textColor="@color/red" />
             </LinearLayout>
+
             <EditText
                 android:id="@+id/kata_sandi"
-                android:inputType="textEmailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/bg_edit_text"
-                android:textSize="15sp"
-                android:paddingHorizontal="15dp"
+                android:fontFamily="@font/poppins_reguler"
                 android:hint="Masukkan Kata Sandi Anda"
-                android:fontFamily="@font/poppins_reguler"/>
+                android:inputType="textEmailAddress"
+                android:paddingHorizontal="15dp"
+                android:textSize="15sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginBottom="20dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tidak dapat mengingat kata sandi anda?"
+                android:layout_marginRight="5dp"
                 android:fontFamily="@font/poppins_reguler"
-                android:textSize="10sp"
-                android:layout_marginRight="5dp"/>
+                android:text="Tidak dapat mengingat kata sandi anda?"
+                android:textSize="10sp" />
+
             <TextView
+                android:id="@+id/link_forgot_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_reguler"
                 android:text="Klik Disini"
                 android:textColor="#0689FF"
-                android:textSize="10sp"
-                android:fontFamily="@font/poppins_reguler"/>
+                android:textSize="10sp" />
         </LinearLayout>
+
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/bg_btn_blue"
-            android:text="Masuk Sekarang"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
-            android:textSize="16sp"
             android:fontFamily="@font/poppins_semibold"
-            android:layout_marginBottom="10dp"/>
+            android:text="Masuk Sekarang"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_login_dev"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Login Developer"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Belum Memiliki Akun?"
-                    android:fontFamily="@font/poppins_reguler"
                     android:layout_marginRight="5dp"
-                    android:textSize="10sp"/>
+                    android:fontFamily="@font/poppins_reguler"
+                    android:text="Belum Memiliki Akun?"
+                    android:textSize="10sp" />
+
                 <TextView
                     android:id="@+id/register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_reguler"
                     android:text="Daftar Sekarang"
                     android:textColor="#0689FF"
-                    android:textSize="10sp"
-                    android:fontFamily="@font/poppins_reguler"/>
+                    android:textSize="10sp" />
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -44,6 +45,11 @@ class Register : AppCompatActivity() {
                         countryCode.text = "+81"
                     }
                 }
+            }
+
+            txtLogin.setOnClickListener {
+                val loginPage = Intent(this@Register, Login::class.java)
+                startActivity(loginPage)
             }
         }
     }

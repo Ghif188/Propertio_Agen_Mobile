@@ -1,10 +1,15 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.myapplication.databinding.FragmentProyekBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,6 +22,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ProyekFragment : Fragment() {
+    private lateinit var binding: FragmentProyekBinding
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -34,7 +40,51 @@ class ProyekFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_proyek, container, false)
+        binding = FragmentProyekBinding.inflate(inflater, container, false)
+        val view = binding.root
+        val propertiAdapter = PropertiAdapter(generateDummy()) {
+        }
+        binding.rvProperti.apply {
+            adapter = propertiAdapter
+            layoutManager = GridLayoutManager(activity, 1)
+
+        }
+        binding.addProperty.setOnClickListener{
+            val intentToAddProperty = Intent(activity, InputProperti::class.java)
+            startActivity(intentToAddProperty)
+        }
+        Log.d("halo",binding.aktifFilter.isFocusable.toString())
+        Log.d("halo",binding.draftFilter.isFocusable.toString())
+        return view
+    }
+
+    private fun generateDummy(): List<Properti> {
+        return listOf(
+            Properti(
+                imgProperti = "https://images.unsplash.com/photo-1523217582562-09d0def993a6?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                judulProperti = "Rumah Idaman",
+                lokasiProperti = "Surabaya",
+                ketProperti = "Tempat yang sangat memanjakan mata yang jauh dihati",
+                hargaProperti = 59000000,
+                disukai = 200,
+                dilihat = 1000,
+                tipeProperti = "Rumah",
+                statusProperti = "Laku",
+                kodeProperti = "RMH-091278"
+            ),
+            Properti(
+                imgProperti = "https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                judulProperti = "Rumah Bagus",
+                lokasiProperti = "Jl. Kubangan Rumah no 22a, kec. Cisarua, kab. Bandung Barat",
+                ketProperti = "Tempat yang sangat memanjakan mata yang jauh dihati",
+                hargaProperti = 5000000,
+                disukai = 200,
+                dilihat = 1000,
+                tipeProperti = "Rumah",
+                statusProperti = "Laku",
+                kodeProperti = "RMH-091278"
+            ),
+        )
     }
 
     companion object {

@@ -3,8 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:weightSum="5">
+    android:weightSum="5"
+    android:paddingVertical="10dp">
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_profil"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:src="@drawable/ic_profil"
@@ -18,11 +20,14 @@
         android:orientation="vertical"
         android:padding="5dp">
         <TextView
+            android:id="@+id/nama_pengirim"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama Pengirim Pesan"
+            android:textSize="17dp"
             android:fontFamily="@font/poppins_semibold"/>
         <TextView
+            android:id="@+id/subjek_pesan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Subject Pesan"
@@ -35,6 +40,7 @@
         android:layout_weight="1"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/waktu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="22:34"

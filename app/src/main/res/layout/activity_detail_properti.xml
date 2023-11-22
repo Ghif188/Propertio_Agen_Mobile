@@ -113,14 +113,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tahun Dibangun"
-                        android:textSize="17"
+                        android:textSize="17dp"
                         android:fontFamily="@font/poppins_semibold"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="2039"
                         android:layout_alignParentEnd="true"
-                        android:textSize="17"/>
+                        android:textSize="17dp"/>
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>

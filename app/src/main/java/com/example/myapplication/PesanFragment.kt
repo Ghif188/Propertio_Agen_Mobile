@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -40,7 +41,9 @@ class PesanFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentPesanBinding.inflate(inflater, container, false)
         val view = binding.root
+        val IntentToDetailPesan = Intent(activity, DetailPesan::class.java)
         val pesanAdapter = PesanAdapter(generateDummy()) {
+            pesan ->  startActivity(IntentToDetailPesan)
         }
         binding.rvPesan.apply {
             adapter = pesanAdapter

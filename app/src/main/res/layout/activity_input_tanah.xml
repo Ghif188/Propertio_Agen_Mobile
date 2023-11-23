@@ -199,6 +199,7 @@
                     android:padding="15dp"
                     android:layout_marginRight="40dp"/>
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_next"
                     app:layout_constraintStart_toEndOf="@id/guide_btn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

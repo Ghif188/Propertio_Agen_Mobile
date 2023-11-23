@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/poppins_black"
-            android:text="Halo Developer"
+            android:text="Halo Agen"
             android:textSize="30sp" />
 
         <TextView

@@ -99,11 +99,11 @@
                     android:layout_marginRight="10dp"
                     android:background="@drawable/bg_btn_filter"
                     android:text="Aktif"
+                    android:textColor="@color/btn_filter"
                     android:textAllCaps="false"
                     android:includeFontPadding="false"
-                    android:fontFamily="@font/poppins_reguler">
-                    <requestFocus/>
-                </androidx.appcompat.widget.AppCompatButton>
+                    android:fontFamily="@font/poppins_reguler"
+                    android:enabled="false"/>
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/draft_filter"
                     android:layout_width="match_parent"
@@ -112,6 +112,7 @@
                     android:layout_marginRight="10dp"
                     android:background="@drawable/bg_btn_filter"
                     android:text="Draft"
+                    android:textColor="@color/btn_filter"
                     android:textAllCaps="false"
                     android:includeFontPadding="false"
                     android:fontFamily="@font/poppins_reguler"/>
@@ -123,6 +124,7 @@
                     android:background="@drawable/bg_btn_filter"
                     android:text="Laku"
                     android:textAllCaps="false"
+                    android:textColor="@color/btn_filter"
                     android:includeFontPadding="false"
                     android:fontFamily="@font/poppins_reguler"/>
             </LinearLayout>

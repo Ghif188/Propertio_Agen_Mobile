@@ -42,7 +42,18 @@
         <item>Jalan kota</item>
         <item>Jalan provinsi</item>
     </array>
-    <!-- TODO: Remove or change this placeholder text -->
+    <array name="tipe_properti">
+        <item>Apartemen</item>
+        <item>Gudang</item>
+        <item>Kantor</item>
+        <item>Kondominium</item>
+        <item>Pabrik</item>
+        <item>Ruang Usaha</item>
+        <item>Ruko</item>
+        <item>Rumah</item>
+        <item>Tanah</item>
+        <item>Villa</item>
+    </array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_input_apartemen">InputApartemen</string>
     <!-- Strings used for fragments for navigation -->

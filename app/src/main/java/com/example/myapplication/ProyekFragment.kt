@@ -53,8 +53,21 @@ class ProyekFragment : Fragment() {
             val intentToAddProperty = Intent(activity, InputProperti::class.java)
             startActivity(intentToAddProperty)
         }
-        Log.d("halo",binding.aktifFilter.isFocusable.toString())
-        Log.d("halo",binding.draftFilter.isFocusable.toString())
+        binding.draftFilter.setOnClickListener{
+            binding.draftFilter.isEnabled = false
+            binding.aktifFilter.isEnabled = true
+            binding.lakuFilter.isEnabled = true
+        }
+        binding.aktifFilter.setOnClickListener{
+            binding.draftFilter.isEnabled = true
+            binding.aktifFilter.isEnabled = false
+            binding.lakuFilter.isEnabled = true
+        }
+        binding.lakuFilter.setOnClickListener{
+            binding.draftFilter.isEnabled = true
+            binding.aktifFilter.isEnabled = true
+            binding.lakuFilter.isEnabled = false
+        }
         return view
     }
 

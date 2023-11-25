@@ -1,10 +1,11 @@
-package com.example.myapplication
+package com.example.myapplication.input
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.myapplication.databinding.ActivityInputApartemenBinding
 import com.example.myapplication.databinding.ActivityInputLokasiBinding
+import com.example.myapplication.input.InputApartemen
+import com.example.myapplication.input.InputGudang
 
 class InputLokasi : AppCompatActivity() {
     private lateinit var binding: ActivityInputLokasiBinding
@@ -45,7 +46,11 @@ class InputLokasi : AppCompatActivity() {
                 }else if (tipeProperti == "Villa"){
                     val intentToVilla = Intent(this@InputLokasi, InputVilla::class.java)
                     startActivity(intentToVilla)
-                }       
+                }
+            }
+            btnBack.setOnClickListener{
+                val intentToInputLokasi = Intent(this@InputLokasi, InputProperti::class.java)
+                startActivity(intentToInputLokasi)
             }
         }
     }

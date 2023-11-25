@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.input
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +15,10 @@ class InputKondominium : AppCompatActivity() {
             btnNext.setOnClickListener {
                 val intentToInputVideo = Intent(this@InputKondominium, InputVideo::class.java)
                 startActivity(intentToInputVideo)
+            }
+            btnBack.setOnClickListener{
+                val intentToInputLokasi = Intent(this@InputKondominium, InputLokasi::class.java)
+                startActivity(intentToInputLokasi)
             }
         }
     }

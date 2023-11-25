@@ -1,7 +1,10 @@
 package com.example.myapplication
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ListPropertyBinding
 import com.squareup.picasso.Picasso
@@ -30,7 +33,33 @@ class PropertiAdapter (
                 itemView.setOnClickListener{
                     onClickDisaster(data)
                 }
+                btnMenu.setOnClickListener {
+                    popupMenus(it)
+                }
             }
+        }
+        private fun popupMenus(v: View){
+            val popupMenus = PopupMenu(itemView.context,v)
+            popupMenus.inflate(R.menu.property_menu)
+            popupMenus.setOnMenuItemClickListener {
+                when(it.itemId){
+                    R.id.edit_properti->{
+                        Toast.makeText(itemView.context, "HALO", Toast.LENGTH_SHORT).show()
+                        true
+                    }
+                    R.id.hapus_properti->{
+                        Toast.makeText(itemView.context, "HALO3", Toast.LENGTH_SHORT).show()
+                        true
+                    }
+                    else->true
+                }
+            }
+            popupMenus.show()
+            val popup = PopupMenu::class.java.getDeclaredField("mPopup")
+            popup.isAccessible = true
+            val menu = popup.get(popupMenus)
+            menu.javaClass.getDeclaredMethod("setForceShowIcon", Boolean::class.java)
+                .invoke(menu, true)
         }
     }
 

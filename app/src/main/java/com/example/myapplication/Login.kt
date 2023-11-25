@@ -25,7 +25,8 @@ class Login : AppCompatActivity() {
                 Toast.makeText(this@Login, "Fitur dalam tahap pengembangan", Toast.LENGTH_SHORT).show()
             }
             register.setOnClickListener{
-                Toast.makeText(this@Login, "Fitur dalam tahap pengembangan", Toast.LENGTH_SHORT).show()
+                val intentToRegister = Intent(this@Login, Register::class.java)
+                startActivity(intentToRegister)
             }
             btnLogin.setOnClickListener {
                 if (email.text.toString().isEmpty()) {

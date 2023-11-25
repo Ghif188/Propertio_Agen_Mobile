@@ -1,8 +1,10 @@
-package com.example.myapplication
+package com.example.myapplication.input
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.myapplication.input.InputLokasi
+import com.example.myapplication.input.InputVideo
 import com.example.myapplication.databinding.ActivityInputGudangBinding
 
 class InputGudang : AppCompatActivity() {
@@ -15,6 +17,10 @@ class InputGudang : AppCompatActivity() {
             btnNext.setOnClickListener {
                 val intentToInputVideo = Intent(this@InputGudang, InputVideo::class.java)
                 startActivity(intentToInputVideo)
+            }
+            btnBack.setOnClickListener{
+                val intentToInputLokasi = Intent(this@InputGudang, InputLokasi::class.java)
+                startActivity(intentToInputLokasi)
             }
         }
     }

@@ -1,9 +1,10 @@
-package com.example.myapplication
+package com.example.myapplication.input
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myapplication.databinding.ActivityInputVideoBinding
+import com.example.myapplication.input.InputFasilitasProperti
 
 class InputVideo : AppCompatActivity() {
     private lateinit var binding: ActivityInputVideoBinding
@@ -13,7 +14,7 @@ class InputVideo : AppCompatActivity() {
         setContentView(binding.root)
         with(binding){
             btnNext.setOnClickListener {
-                val intentToInputVideo = Intent(this@InputVideo, DetailProperti::class.java)
+                val intentToInputVideo = Intent(this@InputVideo, InputFasilitasProperti::class.java)
                 startActivity(intentToInputVideo)
             }
         }

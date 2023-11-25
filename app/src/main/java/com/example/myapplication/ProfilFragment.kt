@@ -1,10 +1,20 @@
 package com.example.myapplication
 
+import android.app.Dialog
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowManager
+import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.myapplication.databinding.FragmentPesanBinding
+import com.example.myapplication.databinding.FragmentProfilBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,6 +27,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ProfilFragment : Fragment() {
+    private lateinit var binding: FragmentProfilBinding
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -33,8 +44,30 @@ class ProfilFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profil, container, false)
+        binding = FragmentProfilBinding.inflate(inflater, container, false)
+        val view = binding.root
+        val intentToChangePass = Intent(activity, ChangePass::class.java)
+        binding.ubahKataSandi.setOnClickListener {
+            startActivity(intentToChangePass)
+        }
+        binding.btnLogout.setOnClickListener {
+            popupLogout()
+        }
+        return view
+    }
+
+    private fun popupLogout() {
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.logout_popup)
+        val window = dialog.window
+        val layoutParams = WindowManager.LayoutParams()
+        layoutParams.copyFrom(window?.attributes)
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
+        layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
+        window?.attributes = layoutParams
+        dialog.show()
     }
 
     companion object {

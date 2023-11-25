@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.input
 
 import android.R
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import com.example.myapplication.MainActivity
 import com.example.myapplication.databinding.ActivityInputPropertiBinding
 
 class InputProperti : AppCompatActivity() {
@@ -34,6 +35,10 @@ class InputProperti : AppCompatActivity() {
             btnNext.setOnClickListener {
                 val intentToInputLokasi = Intent(this@InputProperti, InputLokasi::class.java)
                 intentToInputLokasi.putExtra("tipe", selectedTipe)
+                startActivity(intentToInputLokasi)
+            }
+            btnBack.setOnClickListener{
+                val intentToInputLokasi = Intent(this@InputProperti, MainActivity::class.java)
                 startActivity(intentToInputLokasi)
             }
         }

@@ -1,20 +1,25 @@
 package com.example.myapplication
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.databinding.FragmentPesanBinding
 import com.example.myapplication.databinding.FragmentProfilBinding
+import com.example.myapplication.databinding.LogoutPopupBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,16 +63,30 @@ class ProfilFragment : Fragment() {
 
     private fun popupLogout() {
         val dialog = Dialog(requireContext())
+        val inflaterDialog = requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(true)
         dialog.setContentView(R.layout.logout_popup)
         val window = dialog.window
         val layoutParams = WindowManager.LayoutParams()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         layoutParams.copyFrom(window?.attributes)
         layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
         layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
         window?.attributes = layoutParams
         dialog.show()
+        val btnBatal = dialog.findViewById<TextView>(R.id.btn_batal_logout)
+        val btnClose = dialog.findViewById<TextView>(R.id.btn_close_dialog)
+        val btnLogout = dialog.findViewById<TextView>(R.id.btn_logout)
+        btnClose.setOnClickListener {
+            dialog.cancel()
+        }
+        btnBatal.setOnClickListener {
+            dialog.cancel()
+        }
+        btnLogout.setOnClickListener {
+            dialog.cancel()
+        }
     }
 
     companion object {

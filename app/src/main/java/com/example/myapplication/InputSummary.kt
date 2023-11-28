@@ -4,16 +4,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myapplication.databinding.ActivityDetailPropertiBinding
+import com.example.myapplication.databinding.ActivityInputSummaryBinding
 
-class DetailProperti : AppCompatActivity() {
-    private lateinit var binding: ActivityDetailPropertiBinding
+class InputSummary : AppCompatActivity() {
+    private lateinit var binding: ActivityInputSummaryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityDetailPropertiBinding.inflate(layoutInflater)
+        binding = ActivityInputSummaryBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         with(binding){
-            btnBack.setOnClickListener {
-                val intentToInputVideo = Intent(this@DetailProperti, MainActivity::class.java)
+            btnNext.setOnClickListener {
+                val intentToInputVideo = Intent(this@InputSummary, MainActivity::class.java)
                 startActivity(intentToInputVideo)
             }
         }

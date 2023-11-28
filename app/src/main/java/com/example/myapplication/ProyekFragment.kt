@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -42,9 +43,9 @@ class ProyekFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentProyekBinding.inflate(inflater, container, false)
         val view = binding.root
+        val intentToDetail = Intent(requireContext(), DetailProperti::class.java)
         val propertiAdapter = PropertiAdapter(generateDummy()) {
-            properti ->  val intentToDetail = Intent(activity, DetailProperti::class.java)
-            startActivity(intentToDetail)
+            properti -> startActivity(intentToDetail)
         }
         binding.rvProperti.apply {
             adapter = propertiAdapter

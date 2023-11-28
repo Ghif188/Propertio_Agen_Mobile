@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.DetailProperti
 import com.example.myapplication.Fasilitas
 import com.example.myapplication.FasilitasAdapter
+import com.example.myapplication.InputSummary
 import com.example.myapplication.Properti
 import com.example.myapplication.databinding.ActivityInputFasilitasPropertiBinding
 
@@ -18,7 +19,7 @@ class InputFasilitasProperti : AppCompatActivity() {
         setContentView(binding.root)
         with(binding){
             btnNext.setOnClickListener {
-                val intentToInputVideo = Intent(this@InputFasilitasProperti, DetailProperti::class.java)
+                val intentToInputVideo = Intent(this@InputFasilitasProperti, InputSummary::class.java)
                 startActivity(intentToInputVideo)
             }
             btnBack.setOnClickListener{

@@ -43,6 +43,8 @@ class ProyekFragment : Fragment() {
         binding = FragmentProyekBinding.inflate(inflater, container, false)
         val view = binding.root
         val propertiAdapter = PropertiAdapter(generateDummy()) {
+            properti ->  val intentToDetail = Intent(activity, DetailProperti::class.java)
+            startActivity(intentToDetail)
         }
         binding.rvProperti.apply {
             adapter = propertiAdapter

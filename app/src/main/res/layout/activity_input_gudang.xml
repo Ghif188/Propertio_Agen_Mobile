@@ -66,8 +66,6 @@
                     android:inputType="textMultiLine"
                     android:lines="5"
                     android:maxLines="5"
-                    android:drawableRight="@drawable/ic_arrow_back"
-                    android:drawablePadding="20dp"
                     android:paddingHorizontal="15dp"
                     android:background="@drawable/bg_edit_text"
                     android:scrollbars="vertical" />
@@ -100,6 +98,7 @@
                     android:background="@drawable/bg_edit_text"
                     android:textSize="15sp"
                     android:paddingHorizontal="15dp"
+                    android:drawableRight="@drawable/ic_meter_cubic"
                     android:fontFamily="@font/poppins_reguler"/>
             </LinearLayout>
             <LinearLayout
@@ -130,6 +129,7 @@
                     android:background="@drawable/bg_edit_text"
                     android:textSize="15sp"
                     android:paddingHorizontal="15dp"
+                    android:drawableRight="@drawable/ic_meter_cubic"
                     android:fontFamily="@font/poppins_reguler"/>
             </LinearLayout>
             <LinearLayout
@@ -330,7 +330,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Spinner
-                        android:id="@+id/kondisi"
+                        android:id="@+id/kondisi_spinner"
                         android:background="@drawable/bg_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"

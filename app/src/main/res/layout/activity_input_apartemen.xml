@@ -79,6 +79,7 @@
                     android:layout_height="50dp"
                     android:background="@drawable/bg_edit_text"
                     android:textSize="15sp"
+                    android:drawableRight="@drawable/ic_meter_cubic"
                     android:paddingHorizontal="15dp"
                     android:fontFamily="@font/poppins_reguler"/>
             </LinearLayout>
@@ -200,7 +201,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Spinner
-                        android:id="@+id/posisi"
+                        android:id="@+id/posisiSpinner"
                         android:background="@drawable/bg_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -355,7 +356,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Spinner
-                        android:id="@+id/kondisi"
+                        android:id="@+id/kondisiSpinner"
                         android:background="@drawable/bg_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -384,7 +385,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Spinner
-                        android:id="@+id/interior"
+                        android:id="@+id/interior_spinner"
                         android:background="@drawable/bg_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"

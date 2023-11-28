@@ -67,7 +67,9 @@
                     android:lines="5"
                     android:maxLines="5"
                     android:paddingHorizontal="15dp"
+                    android:hint="Maksimal 70 Karakter"
                     android:background="@drawable/bg_edit_text"
+                    android:fontFamily="@font/poppins_reguler"
                     android:scrollbars="vertical" />
             </LinearLayout>
             <LinearLayout
@@ -99,6 +101,7 @@
                     android:maxLength="100"
                     android:paddingHorizontal="15dp"
                     android:hint="Maksimal 100 Karakter"
+                    android:fontFamily="@font/poppins_reguler"
                     android:background="@drawable/bg_edit_text"
                     android:scrollbars="vertical" />
             </LinearLayout>

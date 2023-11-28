@@ -41,6 +41,8 @@
         <item>Jalan desa</item>
         <item>Jalan kota</item>
         <item>Jalan provinsi</item>
+        <item>Jalan nasional</item>
+        <item>Jalan industri</item>
     </array>
     <array name="tipe_properti">
         <item>Apartemen</item>
@@ -53,6 +55,87 @@
         <item>Rumah</item>
         <item>Tanah</item>
         <item>Villa</item>
+    </array>
+    <array name="tipe_iklan">
+        <item>Sewa</item>
+        <item>Jual</item>
+    </array>
+    <array name="tipe_sertifikat">
+        <item>Hak Milik</item>
+        <item>Hak Guna Bangunan</item>
+        <item>Girik / Petok D</item>
+        <item>Letter C</item>
+        <item>Lainnya</item>
+        <item>Strata</item>
+    </array>
+    <array name="tipe_listrik">
+        <item>Tidak ada</item>
+        <item>Lainnya</item>
+        <item>450 Watt</item>
+        <item>900 Watt</item>
+        <item>1300 Watt</item>
+        <item>2200 Watt</item>
+        <item>3500 Watt</item>
+        <item>4400 Watt</item>
+        <item>5500 Watt</item>
+        <item>6600 Watt</item>
+        <item>7600 Watt</item>
+        <item>7700 Watt</item>
+        <item>8000 Watt</item>
+        <item>9500 Watt</item>
+        <item>10000 Watt</item>
+        <item>10600 Watt</item>
+        <item>11000 Watt</item>
+        <item>12700 Watt</item>
+        <item>13200 Watt</item>
+        <item>13300 Watt</item>
+        <item>13900 Watt</item>
+        <item>16500 Watt</item>
+        <item>17600 Watt</item>
+        <item>19000 Watt</item>
+        <item>22000 Watt</item>
+        <item>23000 Watt</item>
+        <item>24000 Watt</item>
+        <item>30500 Watt</item>
+        <item>33000 Watt</item>
+        <item>38100 Watt</item>
+        <item>41500 Watt</item>
+        <item>47500 Watt</item>
+        <item>53000 Watt</item>
+        <item>61000 Watt</item>
+        <item>66000 Watt</item>
+        <item>76000 Watt</item>
+        <item>82500 Watt</item>
+        <item>85000 Watt</item>
+        <item>95000 Watt</item>
+    </array>
+    <array name="menghadap">
+        <item>Utara</item>
+        <item>Selatan</item>
+        <item>Barat</item>
+        <item>Barat Laut</item>
+        <item>Barat Daya</item>
+        <item>Timur</item>
+        <item>Timur Laut</item>
+        <item>Tenggara</item>
+        <item>Tidak Tahu</item>
+    </array>
+    <array name="kondisi">
+        <item>Masih Bagus</item>
+        <item>Properti Baru</item>
+        <item>Butuh Renovasi</item>
+        <item>Kurang Layak</item>
+        <item>Tidak Layak</item>
+    </array>
+    <array name="tipe_harga">
+        <item>Nego</item>
+        <item>Tetap</item>
+    </array>
+    <array name="posisi">
+        <item>Lantai Dasar</item>
+        <item>Lantai Tengah</item>
+        <item>Lantai Atas</item>
+        <item>Utuh</item>
     </array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_input_apartemen">InputApartemen</string>

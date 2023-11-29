@@ -15,8 +15,14 @@ import com.squareup.picasso.Picasso
 typealias onClickDisaster = (Properti) -> Unit
 
 class PropertiAdapter (
-    private val listDisaster: List<Properti>,
     private val onClickDisaster: onClickDisaster) : RecyclerView.Adapter<PropertiAdapter.ItemDisasterViewHolder>() {
+    private var listDisaster: List<Properti> = listOf()
+
+    fun setData(list: List<Properti>){
+        listDisaster = list
+        notifyDataSetChanged()
+    }
+
     inner class ItemDisasterViewHolder(private val binding : ListPropertyBinding) :
         RecyclerView.ViewHolder(binding.root){
         fun bind (data: Properti){

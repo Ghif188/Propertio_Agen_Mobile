@@ -1,9 +1,9 @@
-package com.example.myapplication
+package com.example.myapplication.input
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.myapplication.databinding.ActivityDetailPropertiBinding
+import com.example.myapplication.MainActivity
 import com.example.myapplication.databinding.ActivityInputSummaryBinding
 
 class InputSummary : AppCompatActivity() {

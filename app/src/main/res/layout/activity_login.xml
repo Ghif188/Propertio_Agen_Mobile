@@ -101,17 +101,22 @@
                     android:text="*"
                     android:textColor="@color/red" />
             </LinearLayout>
-
-            <EditText
-                android:id="@+id/kata_sandi"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/bg_edit_text"
-                android:fontFamily="@font/poppins_reguler"
-                android:hint="Masukkan Kata Sandi Anda"
-                android:inputType="textEmailAddress"
-                android:paddingHorizontal="15dp"
-                android:textSize="15sp" />
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                android:textColorHint="@android:color/darker_gray">
+                <EditText
+                    android:id="@+id/kata_sandi"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_edit_text"
+                    android:fontFamily="@font/poppins_reguler"
+                    android:hint="Masukkan Kata Sandi Anda"
+                    android:inputType="textPassword"
+                    android:paddingHorizontal="15dp"
+                    android:textSize="15sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout

@@ -16,11 +16,13 @@ class InputProperti : AppCompatActivity() {
         binding = ActivityInputPropertiBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val tipeProperti = resources.getStringArray(com.example.myapplication.R.array.tipe_properti)
+        val tipe_properti = resources.getStringArray(com.example.myapplication.R.array.tipe_properti)
+        val tipe_iklan = resources.getStringArray(com.example.myapplication.R.array.tipe_properti)
+        val tipe_sertifikat = resources.getStringArray(com.example.myapplication.R.array.tipe_sertifikat)
         with(binding){
             val tipePropertiAdapter = ArrayAdapter(this@InputProperti,
                 R.layout.simple_spinner_dropdown_item,
-                tipeProperti)
+                tipe_properti)
             tipePropertiAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             tipePropertiSpinner.adapter = tipePropertiAdapter
             var selectedTipe = ""
@@ -32,6 +34,12 @@ class InputProperti : AppCompatActivity() {
                     selectedTipe = parent?.getItemAtPosition(position).toString()
                 }
             }
+            val tipeIklanAdapter  = ArrayAdapter(this@InputProperti, R.layout.simple_spinner_dropdown_item, tipe_iklan)
+            tipeIklanAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            tipeIklan.adapter = tipeIklanAdapter
+            val sertifikatAdapter  = ArrayAdapter(this@InputProperti, R.layout.simple_spinner_dropdown_item, tipe_sertifikat)
+            sertifikatAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            sertifikat.adapter = sertifikatAdapter
             btnNext.setOnClickListener {
                 val intentToInputLokasi = Intent(this@InputProperti, InputLokasi::class.java)
                 intentToInputLokasi.putExtra("tipe", selectedTipe)

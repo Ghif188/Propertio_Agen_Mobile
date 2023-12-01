@@ -15,6 +15,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.databinding.FragmentPesanBinding
@@ -86,6 +87,13 @@ class ProfilFragment : Fragment() {
         }
         btnLogout.setOnClickListener {
             dialog.cancel()
+            val sharedPreferences = activity?.getSharedPreferences("account_data", AppCompatActivity.MODE_PRIVATE)
+            with(sharedPreferences!!.edit()) {
+                putString("token", null)
+                commit()
+            }
+            val intentToLogin = Intent(activity, Login::class.java)
+            startActivity(intentToLogin)
         }
     }
 

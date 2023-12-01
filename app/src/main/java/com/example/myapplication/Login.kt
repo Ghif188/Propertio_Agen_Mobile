@@ -18,9 +18,15 @@ class Login : AppCompatActivity() {
     private lateinit var binding : ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityLoginBinding.inflate(layoutInflater)
+        val sharedPreferences = getSharedPreferences("account_data", MODE_PRIVATE)
+        val tokenFromPrefs = sharedPreferences.getString("token", null)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         with(binding){
+            if (tokenFromPrefs != null){
+                val intentToMainActivity = Intent(this@Login, MainActivity::class.java)
+                startActivity(intentToMainActivity)
+            }
             linkForgotPassword.setOnClickListener {
                 Toast.makeText(this@Login, "Fitur dalam tahap pengembangan", Toast.LENGTH_SHORT).show()
             }
@@ -37,7 +43,6 @@ class Login : AppCompatActivity() {
                     kataSandi.error = "Silakan masukkan kata sandi"
                     return@setOnClickListener
                 }
-
                 login()
             }
             // hanya untuk developer

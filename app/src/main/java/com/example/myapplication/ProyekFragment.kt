@@ -25,9 +25,14 @@ class ProyekFragment : Fragment() {
     private lateinit var binding: FragmentProyekBinding
     private var param1: String? = null
     private var param2: String? = null
-
-    val propertiAdapter = PropertiAdapter() {}
-
+    private lateinit var intentToDetail: Intent
+    val propertiAdapter = PropertiAdapter {
+        properti ->  startActivity(intentToDetail)
+    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        intentToDetail = Intent(requireActivity(), DetailProperti::class.java)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {

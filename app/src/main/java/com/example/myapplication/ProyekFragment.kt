@@ -10,8 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.api.Retrofit
-import com.example.myapplication.api.models.PropertyModel
 import com.example.myapplication.api.property.PropertyApi
+import com.example.myapplication.api.property.PropertyResponse
 import com.example.myapplication.databinding.FragmentProyekBinding
 import com.example.myapplication.input.InputProperti
 import retrofit2.Call
@@ -43,8 +43,9 @@ class ProyekFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentProyekBinding.inflate(inflater, container, false)
         val view = binding.root
-//        propertiAdapter.setData(generateDummy()) // data dummy
-        propertiAdapter.setData(getData()) // data api
+        propertiAdapter.setData(generateDummy()) // data dummy
+//        propertiAdapter.setData(getData()) // data api
+
         binding.rvProperti.apply {
             adapter = propertiAdapter
             layoutManager = LinearLayoutManager(activity)
@@ -108,8 +109,8 @@ class ProyekFragment : Fragment() {
 
         val retro = Retrofit(token).getRetroClientInstance().create(PropertyApi::class.java)
 
-        retro.getPropertyList().enqueue(object: Callback<PropertyModel> {
-            override fun onResponse(call: Call<PropertyModel>, response: Response<PropertyModel>) {
+        retro.getPropertyList().enqueue(object: Callback<PropertyResponse> {
+            override fun onResponse(call: Call<PropertyResponse>, response: Response<PropertyResponse>) {
                 if (response.isSuccessful) {
                     val result = response.body()
                     val properti = result?.data?: emptyList()
@@ -136,7 +137,7 @@ class ProyekFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<PropertyModel>, t: Throwable) {
+            override fun onFailure(call: Call<PropertyResponse>, t: Throwable) {
                 Log.e("ApiCall ListProperty", "onFailure: ${t.message}")
             }
 
@@ -146,15 +147,6 @@ class ProyekFragment : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProyekFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             ProyekFragment().apply {

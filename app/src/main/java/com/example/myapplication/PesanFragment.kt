@@ -1,10 +1,14 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.myapplication.databinding.FragmentPesanBinding
+import com.example.myapplication.databinding.FragmentProyekBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,6 +21,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class PesanFragment : Fragment() {
+    private lateinit var binding: FragmentPesanBinding
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -34,7 +39,29 @@ class PesanFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pesan, container, false)
+        binding = FragmentPesanBinding.inflate(inflater, container, false)
+        val view = binding.root
+        val IntentToDetailPesan = Intent(activity, DetailPesan::class.java)
+        val pesanAdapter = PesanAdapter(generateDummy()) {
+            pesan ->  startActivity(IntentToDetailPesan)
+        }
+        binding.rvPesan.apply {
+            adapter = pesanAdapter
+            layoutManager = GridLayoutManager(activity, 1)
+
+        }
+        return view
+    }
+
+    private fun generateDummy(): List<Pesan> {
+        return listOf(
+            Pesan(
+                namaPengirim = "Ghifari",
+                judulPesan = "Informasi Pemberitahuan Proyek",
+                jamPesan = "10:00",
+                imgPengirim = "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            )
+        )
     }
 
     companion object {

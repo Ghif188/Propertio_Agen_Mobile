@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".InputVilla"
+    tools:context=".input.InputVilla"
     android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
@@ -342,6 +342,7 @@
                     app:layout_constraintGuide_percent="0.35"
                     android:orientation="vertical"/>
                 <ImageButton
+                    android:id="@+id/btn_back"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -350,6 +351,7 @@
                     android:padding="15dp"
                     android:layout_marginRight="40dp"/>
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_next"
                     app:layout_constraintStart_toEndOf="@id/guide_btn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

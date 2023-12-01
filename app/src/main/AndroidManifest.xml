@@ -15,49 +15,60 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".PropertiBerhasil"
+            android:exported="false" />
+        <activity
+            android:name=".input.InputSummary"
+            android:exported="false" />
+        <activity
+            android:name=".DetailPesan"
+            android:exported="false"
+            android:label="@string/title_activity_detail_pesan"
+            android:theme="@style/Theme.MyApplication" />
+        <activity
             android:name=".DetailProperti"
             android:exported="false" />
         <activity
-            android:name=".InputFasilitasProperti"
+            android:name=".input.InputFasilitasProperti"
             android:exported="false" />
         <activity
-            android:name=".InputVideo"
+            android:name=".input.InputVideo"
             android:exported="false" />
         <activity
-            android:name=".InputLokasi"
+            android:name=".input.InputLokasi"
             android:exported="false" />
         <activity
-            android:name=".InputProperti"
+            android:name=".input.InputProperti"
             android:exported="false" />
         <activity
-            android:name=".InputVilla"
+            android:name=".input.InputVilla"
             android:exported="false" />
         <activity
-            android:name=".InputTanah"
+            android:name=".input.InputTanah"
             android:exported="false" />
         <activity
-            android:name=".InputRumah"
+            android:name=".input.InputRumah"
             android:exported="false" />
         <activity
-            android:name=".InputRuko"
+            android:name=".input.InputRuko"
             android:exported="false" />
         <activity
-            android:name=".InputRuangUsaha"
+            android:name=".input.InputRuangUsaha"
             android:exported="false" />
         <activity
-            android:name=".InputPabrik"
+            android:name=".input.InputPabrik"
             android:exported="false" />
         <activity
-            android:name=".InputKondominium"
+            android:name=".input.InputKondominium"
             android:exported="false" />
         <activity
-            android:name=".InputKantor"
+            android:name=".input.InputKantor"
             android:exported="false" />
         <activity
-            android:name=".InputGudang"
+            android:name=".input.InputGudang"
             android:exported="false" />
         <activity
-            android:name=".InputApartemen"
+            android:name=".input.InputApartemen"
             android:exported="false"
             android:label="@string/title_activity_input_apartemen"
             android:theme="@style/Theme.MyApplication" />

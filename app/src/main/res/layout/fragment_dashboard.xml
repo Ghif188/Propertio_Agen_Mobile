@@ -6,7 +6,8 @@
     tools:context=".DashboardFragment">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -260,7 +261,21 @@
             </HorizontalScrollView>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:padding="25dp"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_grafik"
+                    android:scaleType="centerCrop"
+                    android:layout_marginBottom="15dp"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_grafik"
+                    android:scaleType="centerCrop"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

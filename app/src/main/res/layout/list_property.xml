@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_list_properti"
     android:padding="15dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginBottom="15dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,15 +19,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_more"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            android:id="@+id/btn_menu"/>
     </RelativeLayout>
     <ImageView
+        android:id="@+id/thumbnail"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:src="@drawable/ilus_carousel_detail"
         android:scaleType="fitCenter"
         android:layout_marginBottom="20dp"/>
     <TextView
+        android:id="@+id/judul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Judul Properti"
@@ -75,6 +79,7 @@
         android:background="@color/line"
         android:layout_marginBottom="20dp"/>
     <TextView
+        android:id="@+id/alamat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Jl. Pandega, Tegal Barat, Tegal, Jawa Tengah"
@@ -82,6 +87,7 @@
         android:textColor="@color/border"
         android:layout_marginBottom="10dp"/>
     <TextView
+        android:id="@+id/harga"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_reguler"
@@ -126,6 +132,7 @@
         </LinearLayout>
     </LinearLayout>
     <TextView
+        android:id="@+id/kode_properti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_reguler"
@@ -133,6 +140,7 @@
         android:text="Kode : PT_Rumah-03202124122555"
         android:layout_marginBottom="20dp"/>
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_btn_blue_outline"
@@ -143,6 +151,7 @@
         android:textSize="17dp"
         android:layout_marginBottom="10dp"/>
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_repost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_btn_blue"

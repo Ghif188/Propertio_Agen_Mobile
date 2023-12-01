@@ -6,15 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".DetailProperti"
     android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Detail Properti"
-        android:textSize="25dp"
-        android:padding="15dp"
-        android:fontFamily="@font/poppins_semibold"
-        />
+        android:weightSum="8">
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_back"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Detail Properti"
+            android:textSize="25dp"
+            android:padding="15dp"
+            android:layout_weight="7"
+            android:textAlignment="center"
+            android:fontFamily="@font/poppins_semibold"
+            />
+    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -32,6 +46,13 @@
                 android:layout_height="wrap_content"
                 android:padding="25dp"
                 android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5 menit yang lalu"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/border"
+                    android:fontFamily="@font/poppins_reguler"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -50,13 +71,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Rumah"
-                            android:fontFamily="@font/poppins_reguler"/>
+                            android:fontFamily="@font/poppins_semibold"/>
                     </LinearLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SHM"
-                        android:fontFamily="@font/poppins_reguler"
+                        android:text="Listing Type"
+                        android:fontFamily="@font/poppins_semibold"
                         android:background="@drawable/bg_kategori_detail"/>
                 </LinearLayout>
                 <TextView
@@ -64,40 +85,20 @@
                     android:layout_height="wrap_content"
                     android:text="Headline Properti"
                     android:textSize="20dp"
-                    android:layout_marginBottom="15dp"
                     android:fontFamily="@font/poppins_black"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Headline Properti"
+                    android:text="Rp. 100 Juta"
                     android:textSize="17dp"
                     android:layout_marginBottom="15dp"
                     android:fontFamily="@font/poppins_semibold"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Kode Properti"
-                        android:fontFamily="@font/poppins_reguler"
-                        android:layout_marginRight="40dp"/>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_eye"
-                            android:layout_marginRight="5dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="999 k"
-                            android:fontFamily="@font/poppins_reguler"/>
-                    </LinearLayout>
-                </LinearLayout>
+                    android:text="Lokasi"
+                    android:textSize="17dp"
+                    android:fontFamily="@font/poppins_semibold"/>
                 <TextView
                     android:id="@+id/deskripsi"
                     android:layout_width="match_parent"
@@ -105,23 +106,74 @@
                     android:fontFamily="@font/poppins_reguler"
                     android:justificationMode="inter_word"
                     android:layout_marginBottom="15dp"
+                    android:background="@drawable/bg_btn_grey"
+                    android:padding="15dp"
                     android:text="Deskripsi Proyek -- Deskripsi Proyek -- Deskirpsi Proyek Memiliki rumah dengan tipe yang modern minimalis adalah impian semua orang. Saat ini sudah banyak developer yang menyediakan rumah dengan beragam fasilitas yang memadai untuk kebutuhan sehari-hari. Terlebih perumahan baru saat ini sangat mementingkan pembangunan yang cepat agar dapat segera dihuni dan dimiliki."/>
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sertifikat"
+                    android:textSize="17dp"
+                    android:fontFamily="@font/poppins_semibold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_reguler"
+                    android:justificationMode="inter_word"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/bg_btn_grey"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="Hak Milik"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tahun Dibangun"
-                        android:textSize="17"
-                        android:fontFamily="@font/poppins_semibold"/>
-                    <TextView
+                        android:layout_marginRight="10dp">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_home"
+                            android:layout_marginRight="5dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2 Kamar"
+                            android:fontFamily="@font/poppins_semibold"/>
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2039"
-                        android:layout_alignParentEnd="true"
-                        android:textSize="17"/>
-                </RelativeLayout>
+                        android:layout_marginRight="10dp">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_home"
+                            android:layout_marginRight="5dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3 Kamar Mandi"
+                            android:fontFamily="@font/poppins_semibold"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_home"
+                            android:layout_marginRight="5dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="150m"
+                            android:fontFamily="@font/poppins_semibold"/>
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -6,22 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".ChangePass"
     android:padding="25dp"
-    android:layout_marginVertical="35dp"
+    android:layout_marginBottom="35dp"
     android:orientation="vertical"
     android:paddingBottom="40dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ubah Kata Sandi"
-            android:textSize="20sp"
-            android:fontFamily="@font/poppins_black"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="25dp"/>
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_back"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Ubah Kata Sandi"
+                android:textSize="25dp"
+                android:padding="15dp"
+                android:textAlignment="center"
+                android:fontFamily="@font/poppins_semibold"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -131,6 +144,7 @@
             android:layout_marginRight="5dp"
             android:fontFamily="@font/poppins_semibold"/>
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_batal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_btn_grey"

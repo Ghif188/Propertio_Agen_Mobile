@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".InputProperti"
+    tools:context=".input.InputProperti"
     android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
@@ -67,7 +67,9 @@
                     android:lines="5"
                     android:maxLines="5"
                     android:paddingHorizontal="15dp"
+                    android:hint="Maksimal 70 Karakter"
                     android:background="@drawable/bg_edit_text"
+                    android:fontFamily="@font/poppins_reguler"
                     android:scrollbars="vertical" />
             </LinearLayout>
             <LinearLayout
@@ -99,6 +101,7 @@
                     android:maxLength="100"
                     android:paddingHorizontal="15dp"
                     android:hint="Maksimal 100 Karakter"
+                    android:fontFamily="@font/poppins_reguler"
                     android:background="@drawable/bg_edit_text"
                     android:scrollbars="vertical" />
             </LinearLayout>
@@ -126,7 +129,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Spinner
-                        android:id="@+id/tempat_parkir"
+                        android:id="@+id/tipe_properti_spinner"
                         android:background="@drawable/bg_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -164,7 +167,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Spinner
-                        android:id="@+id/posisi"
+                        android:id="@+id/tipe_iklan"
                         android:background="@drawable/bg_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -202,7 +205,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Spinner
-                        android:id="@+id/tipe_air"
+                        android:id="@+id/sertifikat"
                         android:background="@drawable/bg_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -226,6 +229,7 @@
                     app:layout_constraintGuide_percent="0.35"
                     android:orientation="vertical"/>
                 <ImageButton
+                    android:id="@+id/btn_back"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -234,6 +238,7 @@
                     android:padding="15dp"
                     android:layout_marginRight="40dp"/>
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_next"
                     app:layout_constraintStart_toEndOf="@id/guide_btn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

@@ -3,9 +3,9 @@ package com.example.myapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class InputRumah : AppCompatActivity() {
+class PropertiBerhasil : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_input_rumah)
+        setContentView(R.layout.activity_properti_berhasil)
     }
 }

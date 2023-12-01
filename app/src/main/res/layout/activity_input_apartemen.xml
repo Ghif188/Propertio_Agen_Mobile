@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".InputApartemen"
+    tools:context=".input.InputApartemen"
     android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
@@ -79,6 +79,7 @@
                     android:layout_height="50dp"
                     android:background="@drawable/bg_edit_text"
                     android:textSize="15sp"
+                    android:drawableRight="@drawable/ic_meter_cubic"
                     android:paddingHorizontal="15dp"
                     android:fontFamily="@font/poppins_reguler"/>
             </LinearLayout>
@@ -200,7 +201,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Spinner
-                        android:id="@+id/posisi"
+                        android:id="@+id/posisiSpinner"
                         android:background="@drawable/bg_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -355,7 +356,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Spinner
-                        android:id="@+id/kondisi"
+                        android:id="@+id/kondisiSpinner"
                         android:background="@drawable/bg_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -384,7 +385,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Spinner
-                        android:id="@+id/interior"
+                        android:id="@+id/interior_spinner"
                         android:background="@drawable/bg_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -437,6 +438,7 @@
                     app:layout_constraintGuide_percent="0.35"
                     android:orientation="vertical"/>
                 <ImageButton
+                    android:id="@+id/btn_back"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -445,6 +447,7 @@
                     android:padding="15dp"
                     android:layout_marginRight="40dp"/>
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_next"
                     app:layout_constraintStart_toEndOf="@id/guide_btn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

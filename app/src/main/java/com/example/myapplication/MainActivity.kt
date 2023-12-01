@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         replaceFragment(DashboardFragment())
 
-        binding.bottomNavbar.setOnItemReselectedListener {
+        binding.bottomNavbar.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.nav_dash->replaceFragment(DashboardFragment())
                 R.id.nav_proyek->replaceFragment(ProyekFragment())

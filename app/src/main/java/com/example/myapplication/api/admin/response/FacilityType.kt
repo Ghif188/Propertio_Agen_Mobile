@@ -1,9 +1,10 @@
 package com.example.myapplication.api.admin.response
 
+import com.example.myapplication.api.models.DefaultResponse
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class FacilityType {
+class FacilityType : DefaultResponse() {
     @SerializedName("data")
     @Expose
     var facility : FacilityResponse? = null

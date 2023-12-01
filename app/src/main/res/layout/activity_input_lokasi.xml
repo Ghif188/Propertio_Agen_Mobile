@@ -64,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Spinner
-                        android:id="@+id/tempat_parkir"
+                        android:id="@+id/list_provinsi"
                         android:background="@drawable/bg_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -102,7 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Spinner
-                        android:id="@+id/posisi"
+                        android:id="@+id/list_kabupaten"
                         android:background="@drawable/bg_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -140,7 +140,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Spinner
-                        android:id="@+id/tipe_air"
+                        android:id="@+id/list_kecamatan"
                         android:background="@drawable/bg_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -166,6 +166,7 @@
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/poppins_reguler"/>
                 <EditText
+                    android:id="@+id/alamat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"

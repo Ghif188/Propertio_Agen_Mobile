@@ -1,9 +1,10 @@
-package com.example.myapplication.api.models
+package com.example.myapplication.api.property
 
+import com.example.myapplication.api.models.DefaultResponse
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class PropertyModel {
+class PropertiesResponse : DefaultResponse() {
     @SerializedName("data")
     @Expose
     var data : List <Property> ?= null

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ListPesanBinding
+import com.example.myapplication.model.Pesan
 import com.squareup.picasso.Picasso
 
 typealias onClickPesan = (Pesan) -> Unit

@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.databinding.FragmentPesanBinding
-import com.example.myapplication.databinding.FragmentProyekBinding
+import com.example.myapplication.model.Pesan
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

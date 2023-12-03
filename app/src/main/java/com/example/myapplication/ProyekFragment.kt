@@ -14,6 +14,7 @@ import com.example.myapplication.api.property.PropertyApi
 import com.example.myapplication.api.property.PropertyResponse
 import com.example.myapplication.databinding.FragmentProyekBinding
 import com.example.myapplication.input.InputProperti
+import com.example.myapplication.model.Properti
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

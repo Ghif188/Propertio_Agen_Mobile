@@ -1,15 +1,13 @@
 package com.example.myapplication
 
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ListPropertyBinding
+import com.example.myapplication.model.Properti
 import com.squareup.picasso.Picasso
 
 typealias onClickDisaster = (Properti) -> Unit

@@ -27,6 +27,7 @@ class Login : AppCompatActivity() {
                 val intentToMainActivity = Intent(this@Login, MainActivity::class.java)
                 startActivity(intentToMainActivity)
             }
+
             linkForgotPassword.setOnClickListener {
                 Toast.makeText(this@Login, "Fitur dalam tahap pengembangan", Toast.LENGTH_SHORT).show()
             }

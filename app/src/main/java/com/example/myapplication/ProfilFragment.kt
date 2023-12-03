@@ -92,6 +92,7 @@ class ProfilFragment : Fragment() {
                 putString("token", null)
                 commit()
             }
+
             val intentToLogin = Intent(activity, Login::class.java)
             startActivity(intentToLogin)
         }

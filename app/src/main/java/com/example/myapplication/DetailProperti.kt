@@ -13,8 +13,7 @@ class DetailProperti : AppCompatActivity() {
         setContentView(binding.root)
         with(binding){
             btnBack.setOnClickListener {
-                val intentToInputVideo = Intent(this@DetailProperti, MainActivity::class.java)
-                startActivity(intentToInputVideo)
+                finish()
             }
         }
     }

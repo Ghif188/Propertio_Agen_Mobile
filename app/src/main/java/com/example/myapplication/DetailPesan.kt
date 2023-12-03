@@ -13,8 +13,7 @@ class DetailPesan : AppCompatActivity() {
         setContentView(binding.root)
         with(binding){
             btnBack.setOnClickListener {
-                val intentToInputVideo = Intent(this@DetailPesan, MainActivity::class.java)
-                startActivity(intentToInputVideo)
+                finish()
             }
         }
     }

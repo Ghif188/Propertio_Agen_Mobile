@@ -32,7 +32,7 @@ class InputLokasi : AppCompatActivity() {
             val regencyAdapter = ArrayAdapter(this@InputLokasi, android.R.layout.simple_spinner_item, defaultRegency)
             regencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             listKabupaten.adapter = regencyAdapter
-
+          
             listKecamatan.isEnabled = false
             val defaultDistrict = mutableListOf("Pilih Kecamatan")
             val districtAdapter = ArrayAdapter(this@InputLokasi, android.R.layout.simple_spinner_item, defaultDistrict)
@@ -40,7 +40,6 @@ class InputLokasi : AppCompatActivity() {
             listKecamatan.adapter = districtAdapter
 
             fetchProvince()
-
             btnNext.setOnClickListener {
                 val intent: Intent
                 when (tipeProperti) {

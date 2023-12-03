@@ -53,6 +53,7 @@ class InputProperti : AppCompatActivity() {
                 val sertif = selected_sertifikat
                 val intentToInputLokasi = Intent(this@InputProperti, InputLokasi::class.java)
                 intentToInputLokasi.putExtra("tipe", tipe)
+
                 startActivity(intentToInputLokasi)
             }
 

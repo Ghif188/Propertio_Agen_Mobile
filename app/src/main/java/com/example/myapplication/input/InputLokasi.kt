@@ -27,19 +27,19 @@ class InputLokasi : AppCompatActivity() {
         val tipeProperti = intent.extras?.getString("tipe")
 
         with(binding){
+            listKabupaten.isEnabled = false
             val defaultRegency = mutableListOf("Pilih Kabupaten")
             val regencyAdapter = ArrayAdapter(this@InputLokasi, android.R.layout.simple_spinner_item, defaultRegency)
             regencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             listKabupaten.adapter = regencyAdapter
 
+            listKecamatan.isEnabled = false
             val defaultDistrict = mutableListOf("Pilih Kecamatan")
             val districtAdapter = ArrayAdapter(this@InputLokasi, android.R.layout.simple_spinner_item, defaultDistrict)
             districtAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             listKecamatan.adapter = districtAdapter
 
             fetchProvince()
-            listKabupaten.isEnabled = false
-            listKecamatan.isEnabled = false
 
             btnNext.setOnClickListener {
                 val intent: Intent
@@ -63,8 +63,7 @@ class InputLokasi : AppCompatActivity() {
             }
 
             btnBack.setOnClickListener{
-                val intentToInputLokasi = Intent(this@InputLokasi, InputProperti::class.java)
-                startActivity(intentToInputLokasi)
+                finish()
             }
         }
     }
@@ -102,11 +101,7 @@ class InputLokasi : AppCompatActivity() {
                                 var selectedProvinceId = result?.get(position - 1)?.id.toString()
 
                                 binding.listKabupaten.isEnabled = true
-                                binding.listKecamatan.isEnabled = true
                                 fetchRegencies(selectedProvinceId)
-                            } else {
-                                binding.listKabupaten.isEnabled = false
-                                binding.listKecamatan.isEnabled = true
                             }
                         }
 
@@ -155,8 +150,6 @@ class InputLokasi : AppCompatActivity() {
 
                                 binding.listKecamatan.isEnabled = true
                                 fetchDistrict(selectedRegencyId)
-                            } else {
-                                binding.listKecamatan.isEnabled = true
                             }
                         }
                         override fun onNothingSelected(parentView: AdapterView<*>) {}

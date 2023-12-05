@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter
 import com.example.myapplication.input.InputLokasi
 import com.example.myapplication.input.InputVideo
 import com.example.myapplication.databinding.ActivityInputGudangBinding
+import com.example.myapplication.model.FormDetailProperti
+import com.example.myapplication.model.FormProperti
+import java.io.Serializable
 
 class InputGudang : AppCompatActivity() {
     private lateinit var binding: ActivityInputGudangBinding
@@ -22,9 +25,25 @@ class InputGudang : AppCompatActivity() {
         val kondisi = resources.getStringArray(com.example.myapplication.R.array.kondisi)
         val akses_jalan = resources.getStringArray(com.example.myapplication.R.array.jalan)
 
+        val dataTemp = intent.extras?.get("temp") as FormProperti
         with(binding){
             btnNext.setOnClickListener {
+                var detailTemp = FormDetailProperti()
+
+                detailTemp.deskripsi = deskripsi.text.toString()
+                detailTemp.luasTanah = luasTanah.text.toString().toInt()
+                detailTemp.luasBangunan = luasBangunan.text.toString().toInt()
+                detailTemp.tempatParkir = tempatParkir.selectedItem.toString()
+                detailTemp.tahunDibangun = tahunDibangun.text.toString().toInt()
+                detailTemp.harga = harga.text.toString().toInt()
+                detailTemp.tipeHarga = tipeHarga.selectedItem.toString()
+                detailTemp.dayaListrik = dayaListrik.selectedItem.toString()
+                detailTemp.kondisi = kondisiSpinner.selectedItem.toString()
+                detailTemp.aksesJalan = aksesJalan.selectedItem.toString()
+
+                dataTemp.detailProperti = detailTemp
                 val intentToInputVideo = Intent(this@InputGudang, InputVideo::class.java)
+                intentToInputVideo.putExtra("temp", dataTemp as Serializable)
                 startActivity(intentToInputVideo)
             }
 

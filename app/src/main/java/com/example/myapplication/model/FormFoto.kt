@@ -1,7 +1,9 @@
 package com.example.myapplication.model
 
+import java.io.Serializable
+
 data class FormFoto (
-    val image: String? = "",
-    val status: String? = "",
-    val cation: String? = "",
-)
+    var image: String? = "",
+    var status: String? = "",
+    var cation: String? = "",
+) : Serializable

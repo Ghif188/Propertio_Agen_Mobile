@@ -16,9 +16,11 @@ import com.example.myapplication.api.Retrofit
 import com.example.myapplication.api.admin.TypeProperty
 import com.example.myapplication.api.admin.response.TypePropertyResponse
 import com.example.myapplication.databinding.ActivityInputPropertiBinding
+import com.example.myapplication.model.FormProperti
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.Serializable
 
 class InputProperti : AppCompatActivity() {
     private lateinit var binding: ActivityInputPropertiBinding
@@ -45,15 +47,15 @@ class InputProperti : AppCompatActivity() {
             getTipeIklan(tipe_iklan)
             getSertifikat(tipe_sertifikat)
 
+            val dataTemp = FormProperti()
             btnNext.setOnClickListener {
-                val berita = txtBeritaUtama.text.toString()
-                val judul = txtJudulProperti.text.toString()
-                val tipe = selected_tipe_properti
-                val iklan = selected_tipe_iklan
-                val sertif = selected_sertifikat
+                dataTemp.beritaProperti = txtBeritaUtama.text.toString()
+                dataTemp.judulProperti = txtJudulProperti.text.toString()
+                dataTemp.tipeProperti= selected_tipe_properti
+                dataTemp.tipeIklan = selected_tipe_iklan
+                dataTemp.tipeSertifikat = selected_sertifikat
                 val intentToInputLokasi = Intent(this@InputProperti, InputLokasi::class.java)
-                intentToInputLokasi.putExtra("tipe", tipe)
-
+                intentToInputLokasi.putExtra("temp", dataTemp as Serializable)
                 startActivity(intentToInputLokasi)
             }
 

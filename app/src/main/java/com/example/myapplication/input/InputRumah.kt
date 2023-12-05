@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import com.example.myapplication.databinding.ActivityInputRumahBinding
+import com.example.myapplication.model.FormDetailProperti
+import com.example.myapplication.model.FormProperti
+import java.io.Serializable
 
 class InputRumah : AppCompatActivity() {
     private lateinit var binding: ActivityInputRumahBinding
@@ -23,9 +26,32 @@ class InputRumah : AppCompatActivity() {
         val akses_jalan = resources.getStringArray(com.example.myapplication.R.array.jalan)
         val menghadap = resources.getStringArray(com.example.myapplication.R.array.menghadap)
 
+        val dataTemp = intent.extras?.get("temp") as FormProperti
+
         with(binding){
             btnNext.setOnClickListener {
+                var detailTemp = FormDetailProperti()
+
+                detailTemp.deskripsi = deskripsi.text.toString()
+                detailTemp.luasTanah = luasTanah.text.toString().toInt()
+                detailTemp.luasBangunan = luasBangunan.text.toString().toInt()
+                detailTemp.jmlKamar = kamar.text.toString().toInt()
+                detailTemp.jmlKamarMandi = kamarMandi.text.toString().toInt()
+                detailTemp.jmlLantai = jmlLantai.text.toString().toInt()
+                detailTemp.tahunDibangun = tahunDibangun.text.toString().toInt()
+                detailTemp.harga = harga.text.toString().toInt()
+                detailTemp.tempatParkir = tempatParkir.selectedItem.toString()
+                detailTemp.tipeHarga = tipeHarga.selectedItem.toString()
+                detailTemp.dayaListrik = dayaListrik.selectedItem.toString()
+                detailTemp.kondisi = kondisiSpinner.selectedItem.toString()
+                detailTemp.tipeAir = tipeAir.selectedItem.toString()
+                detailTemp.interior = interiorSpinner.selectedItem.toString()
+                detailTemp.aksesJalan = aksesJalan.selectedItem.toString()
+                detailTemp.menghadap = menghadapSpinner.selectedItem.toString()
+
+                dataTemp.detailProperti = detailTemp
                 val intentToInputVideo = Intent(this@InputRumah, InputVideo::class.java)
+                intentToInputVideo.putExtra("temp", dataTemp as Serializable)
                 startActivity(intentToInputVideo)
             }
 

@@ -8,6 +8,8 @@ import com.example.myapplication.DetailProperti
 import com.example.myapplication.Fasilitas
 import com.example.myapplication.FasilitasAdapter
 import com.example.myapplication.databinding.ActivityInputFasilitasPropertiBinding
+import com.example.myapplication.model.FormProperti
+import java.io.Serializable
 
 class InputFasilitasProperti : AppCompatActivity() {
     private lateinit var binding: ActivityInputFasilitasPropertiBinding
@@ -15,14 +17,15 @@ class InputFasilitasProperti : AppCompatActivity() {
         binding = ActivityInputFasilitasPropertiBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        val dataTemp = intent.extras?.get("temp") as FormProperti
         with(binding){
             btnNext.setOnClickListener {
-                val intentToInputVideo = Intent(this@InputFasilitasProperti, InputSummary::class.java)
-                startActivity(intentToInputVideo)
+                val intentToSummary = Intent(this@InputFasilitasProperti, InputSummary::class.java)
+                intentToSummary.putExtra("temp", dataTemp as Serializable)
+                startActivity(intentToSummary)
             }
             btnBack.setOnClickListener{
-                val intentToInputLokasi = Intent(this@InputFasilitasProperti, DetailProperti::class.java)
-                startActivity(intentToInputLokasi)
+                finish()
             }
             val fasilitasAdapter = FasilitasAdapter(generateDummy()) {
             }

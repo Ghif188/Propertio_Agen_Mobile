@@ -1,5 +1,7 @@
 package com.example.myapplication.model
 
+import java.io.Serializable
+
 data class FormFasilitas (
-    val namaFasilitas: String? = ""
-)
+    var namaFasilitas: String? = ""
+) : Serializable

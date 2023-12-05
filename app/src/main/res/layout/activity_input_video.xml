@@ -303,7 +303,6 @@
                     android:fontFamily="@font/poppins_reguler"/>
                 <EditText
                     android:id="@+id/nama_virtual_tour"
-                    android:inputType="number"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/bg_edit_text"
@@ -324,7 +323,6 @@
                     android:fontFamily="@font/poppins_reguler"/>
                 <EditText
                     android:id="@+id/link_virtual_tour"
-                    android:inputType="number"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/bg_edit_text"

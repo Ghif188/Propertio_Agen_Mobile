@@ -52,6 +52,7 @@
                         android:layout_marginBottom="5dp"
                         android:fontFamily="@font/poppins_reguler"/>
                 <EditText
+                    android:id="@+id/deskripsi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"

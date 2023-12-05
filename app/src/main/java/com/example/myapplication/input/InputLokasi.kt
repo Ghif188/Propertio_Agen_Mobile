@@ -13,9 +13,11 @@ import com.example.myapplication.api.admin.location.ProvinceResponse
 import com.example.myapplication.api.admin.location.RegenciesResponse
 import com.example.myapplication.api.admin.location.RetroLocation
 import com.example.myapplication.databinding.ActivityInputLokasiBinding
+import com.example.myapplication.model.FormProperti
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.Serializable
 
 class InputLokasi : AppCompatActivity() {
     private lateinit var binding: ActivityInputLokasiBinding
@@ -24,7 +26,7 @@ class InputLokasi : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val tipeProperti = intent.extras?.getString("tipe")
+        val dataTemp = intent.extras?.get("temp") as FormProperti
 
         with(binding){
             listKabupaten.isEnabled = false
@@ -42,7 +44,7 @@ class InputLokasi : AppCompatActivity() {
             fetchProvince()
             btnNext.setOnClickListener {
                 val intent: Intent
-                when (tipeProperti) {
+                when (dataTemp.tipeProperti) {
                     "Apartemen" -> {intent = Intent(this@InputLokasi, InputApartemen::class.java)}
                     "Gudang" -> {intent = Intent(this@InputLokasi, InputGudang::class.java)}
                     "Kantor" -> {intent = Intent(this@InputLokasi, InputKantor::class.java)}
@@ -58,6 +60,7 @@ class InputLokasi : AppCompatActivity() {
                         return@setOnClickListener
                     }
                 }
+                intent.putExtra("temp", dataTemp as Serializable)
                 startActivity(intent)
             }
 

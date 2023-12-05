@@ -10,6 +10,9 @@ import android.widget.ArrayAdapter
 import com.example.myapplication.input.InputLokasi
 import com.example.myapplication.input.InputVideo
 import com.example.myapplication.databinding.ActivityInputApartemenBinding
+import com.example.myapplication.model.FormDetailProperti
+import com.example.myapplication.model.FormProperti
+import java.io.Serializable
 
 class InputApartemen : AppCompatActivity() {
     private lateinit var binding: ActivityInputApartemenBinding
@@ -27,9 +30,30 @@ class InputApartemen : AppCompatActivity() {
         val interior = resources.getStringArray(com.example.myapplication.R.array.interior)
         val akses_jalan = resources.getStringArray(com.example.myapplication.R.array.jalan)
 
+        val dataTemp = intent.extras?.get("temp") as FormProperti
+
         with(binding){
             btnNext.setOnClickListener {
+                var detailTemp = FormDetailProperti()
+
+                detailTemp.deskripsi = deskripsi.text.toString()
+                detailTemp.luasBangunan = luasBangunan.text.toString().toInt()
+                detailTemp.jmlKamar = kamar.text.toString().toInt()
+                detailTemp.jmlKamarMandi = kamarMandi.text.toString().toInt()
+                detailTemp.tahunDibangun = tahunDibangun.text.toString().toInt()
+                detailTemp.harga = harga.text.toString().toInt()
+                detailTemp.tempatParkir = tempatParkir.selectedItem.toString()
+                detailTemp.posisi = posisiSpinner.selectedItem.toString()
+                detailTemp.tipeHarga = tipeHarga.selectedItem.toString()
+                detailTemp.dayaListrik = dayaListrik.selectedItem.toString()
+                detailTemp.kondisi = kondisiSpinner.selectedItem.toString()
+                detailTemp.tipeAir = tipeAir.selectedItem.toString()
+                detailTemp.interior = interiorSpinner.selectedItem.toString()
+                detailTemp.aksesJalan = aksesJalan.selectedItem.toString()
+
+                dataTemp.detailProperti = detailTemp
                 val intentToInputVideo = Intent(this@InputApartemen, InputVideo::class.java)
+                intentToInputVideo.putExtra("temp", dataTemp as Serializable)
                 startActivity(intentToInputVideo)
             }
 

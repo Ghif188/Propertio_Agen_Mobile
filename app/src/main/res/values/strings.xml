@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Agent Propertio</string>
     <array name="country">
         <item>USA</item>
         <item>AUS</item>

@@ -21,6 +21,10 @@ import java.io.Serializable
 
 class InputLokasi : AppCompatActivity() {
     private lateinit var binding: ActivityInputLokasiBinding
+    private var selected_province = ""
+    private var selected_regency = ""
+    private var selected_district = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityInputLokasiBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -101,6 +105,7 @@ class InputLokasi : AppCompatActivity() {
                         ) {
                             if (position != 0) {
                                 var selectedProvinceId = result?.get(position - 1)?.id.toString()
+                                selected_province = result?.get(position - 1)?.name.toString()
 
                                 binding.listKabupaten.isEnabled = true
                                 fetchRegencies(selectedProvinceId)
@@ -149,6 +154,7 @@ class InputLokasi : AppCompatActivity() {
                         ) {
                             if (position != 0) {
                                 var selectedRegencyId = result?.get(position - 1)?.id.toString()
+                                selected_regency = result?.get(position - 1)?.name.toString()
 
                                 binding.listKecamatan.isEnabled = true
                                 fetchDistrict(selectedRegencyId)
@@ -195,7 +201,7 @@ class InputLokasi : AppCompatActivity() {
                             id: Long
                         ) {
                             if (position != 0) {
-                                var selectedDistrictName = result?.get(position - 1)?.name.toString()
+                                selected_district = result?.get(position - 1)?.name.toString()
                             }
                         }
                         override fun onNothingSelected(parentView: AdapterView<*>) {}

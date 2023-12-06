@@ -4,10 +4,10 @@ import com.example.myapplication.api.models.DefaultResponse
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class FacilityType : DefaultResponse() {
+class FacilityResponse : DefaultResponse() {
     @SerializedName("data")
     @Expose
-    var facility : FacilityResponse? = null
+    var data : List<FacilityResponse>? = null
 
     class FacilityResponse {
         @SerializedName("id")

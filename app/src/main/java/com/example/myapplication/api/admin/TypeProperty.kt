@@ -1,9 +1,8 @@
 package com.example.myapplication.api.admin
 
-import com.example.myapplication.api.admin.response.FacilityType
+import com.example.myapplication.api.admin.response.FacilityResponse
 import com.example.myapplication.api.admin.response.InfrastructureType
 import com.example.myapplication.api.admin.response.TypePropertyResponse
-import com.example.myapplication.api.property.PropertyResponse
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -12,7 +11,7 @@ interface TypeProperty {
     fun getPropertyType(): Call<TypePropertyResponse>
 
     @GET("v1/cms/facility-type")
-    fun getFacilityType(): Call<FacilityType>
+    fun getFacilityType(): Call<FacilityResponse>
 
     @GET("v1/cms/infrastructure-type")
     fun getInfrastructureType(): Call<InfrastructureType>

@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Toast
 import com.example.myapplication.databinding.ActivityInputKondominiumBinding
 import com.example.myapplication.model.FormDetailProperti
 import com.example.myapplication.model.FormProperti
@@ -30,14 +32,39 @@ class InputKondominium : AppCompatActivity() {
 
         with(binding){
             btnNext.setOnClickListener {
+                if (deskripsi.text.isEmpty()) {
+                    Toast.makeText(this@InputKondominium, "Masukkan deskripsi kondominium", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (luasBangunan.text.isEmpty()) {
+                    Toast.makeText(this@InputKondominium, "Masukkan luas bangunan", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (kamar.text.isEmpty()) {
+                    Toast.makeText(this@InputKondominium, "Masukkan jumlah kamar", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (tahunDibangun.text.isEmpty()) {
+                    Toast.makeText(this@InputKondominium, "Masukkan tahun dibangun kondominium", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (harga.text.isEmpty()) {
+                    Toast.makeText(this@InputKondominium, "Masukkan harga kondominium", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
                 var detailTemp = FormDetailProperti()
 
                 detailTemp.deskripsi = deskripsi.text.toString()
-                detailTemp.luasBangunan = luasBangunan.text.toString().toInt()
-                detailTemp.jmlKamar = kamar.text.toString().toInt()
-                detailTemp.jmlKamarMandi = kamarMandi.text.toString().toInt()
-                detailTemp.tahunDibangun = tahunDibangun.text.toString().toInt()
-                detailTemp.harga = harga.text.toString().toInt()
+                detailTemp.luasBangunan = parseToInt(luasBangunan)
+                detailTemp.jmlKamar = parseToInt(kamar)
+                detailTemp.jmlKamarMandi = parseToInt(kamarMandi)
+                detailTemp.tahunDibangun = parseToInt(tahunDibangun)
+                detailTemp.harga = parseToInt(harga)
                 detailTemp.tempatParkir = tempatParkir.selectedItem.toString()
                 detailTemp.posisi = posisiSpinner.selectedItem.toString()
                 detailTemp.tipeHarga = tipeHarga.selectedItem.toString()
@@ -104,6 +131,14 @@ class InputKondominium : AppCompatActivity() {
                 akses_jalan)
             jalanAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             aksesJalan.adapter = jalanAdapter
+        }
+    }
+
+    private fun parseToInt(editText: EditText) : Int {
+        return if (editText.text.isEmpty()) {
+            0
+        } else {
+            editText.text.toString().toInt()
         }
     }
 }

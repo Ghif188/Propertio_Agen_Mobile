@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Toast
 import com.example.myapplication.databinding.ActivityInputPabrikBinding
 import com.example.myapplication.model.FormDetailProperti
 import com.example.myapplication.model.FormProperti
@@ -29,14 +31,39 @@ class InputPabrik : AppCompatActivity() {
 
         with(binding){
             btnNext.setOnClickListener {
+                if (deskripsi.text.isEmpty()) {
+                    Toast.makeText(this@InputPabrik, "Masukkan deskripsi pabrik", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (luasTanah.text.isEmpty()) {
+                    Toast.makeText(this@InputPabrik, "Masukkan luas tanah", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (luasBangunan.text.isEmpty()) {
+                    Toast.makeText(this@InputPabrik, "Masukkan luas bangunan", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (tahunDibangun.text.isEmpty()) {
+                    Toast.makeText(this@InputPabrik, "Masukkan tahun dibangun pabrik", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (harga.text.isEmpty()) {
+                    Toast.makeText(this@InputPabrik, "Masukkan harga jual pabrik", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
                 var detailTemp = FormDetailProperti()
 
                 detailTemp.deskripsi = deskripsi.text.toString()
-                detailTemp.luasTanah = luasTanah.text.toString().toInt()
-                detailTemp.luasBangunan = luasBangunan.text.toString().toInt()
-                detailTemp.jmlKamarMandi = kamarMandi.text.toString().toInt()
-                detailTemp.tahunDibangun = tahunDibangun.text.toString().toInt()
-                detailTemp.harga = harga.text.toString().toInt()
+                detailTemp.luasTanah = parseToInt(luasTanah)
+                detailTemp.luasBangunan = parseToInt(luasBangunan)
+                detailTemp.jmlKamarMandi = parseToInt(kamarMandi)
+                detailTemp.tahunDibangun = parseToInt(tahunDibangun)
+                detailTemp.harga = parseToInt(harga)
                 detailTemp.tempatParkir = tempatParkir.selectedItem.toString()
                 detailTemp.tipeHarga = tipeHarga.selectedItem.toString()
                 detailTemp.dayaListrik = dayaListrik.selectedItem.toString()
@@ -96,6 +123,14 @@ class InputPabrik : AppCompatActivity() {
                 akses_jalan)
             jalanAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             aksesJalan.adapter = jalanAdapter
+        }
+    }
+
+    private fun parseToInt(editText: EditText) : Int {
+        return if (editText.text.isEmpty()) {
+            0
+        } else {
+            editText.text.toString().toInt()
         }
     }
 }

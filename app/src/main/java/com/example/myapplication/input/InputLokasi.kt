@@ -3,6 +3,7 @@ package com.example.myapplication.input
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -47,14 +48,27 @@ class InputLokasi : AppCompatActivity() {
 
             fetchProvince()
             btnNext.setOnClickListener {
+                if (selected_province.isEmpty()) {
+                    Toast.makeText(this@InputLokasi, "Silakan pilih provinsi terlebih dahulu", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                if (selected_regency.isEmpty()) {
+                    Toast.makeText(this@InputLokasi, "Silakan pilih kabupaten terlebih dahulu", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                if (selected_district.isEmpty()) {
+                    Toast.makeText(this@InputLokasi, "Silakan pilih kecamatan terlebih dahulu", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
                 val intent: Intent
                 when (dataTemp.tipeProperti) {
                     "Apartemen" -> {intent = Intent(this@InputLokasi, InputApartemen::class.java)}
                     "Gudang" -> {intent = Intent(this@InputLokasi, InputGudang::class.java)}
-                    "Kantor" -> {intent = Intent(this@InputLokasi, InputKantor::class.java)}
+                    "Perkantoran" -> {intent = Intent(this@InputLokasi, InputKantor::class.java)}
                     "Kondominium" -> {intent = Intent(this@InputLokasi, InputKondominium::class.java)}
                     "Pabrik" -> {intent = Intent(this@InputLokasi, InputPabrik::class.java)}
-                    "Ruang Usaha" -> {intent = Intent(this@InputLokasi, InputRuangUsaha::class.java)}
+                    "Ruang usaha" -> {intent = Intent(this@InputLokasi, InputRuangUsaha::class.java)}
                     "Ruko" -> {intent = Intent(this@InputLokasi, InputRuko::class.java)}
                     "Rumah" -> {intent = Intent(this@InputLokasi, InputRumah::class.java)}
                     "Tanah" -> {intent = Intent(this@InputLokasi, InputTanah::class.java)}
@@ -64,6 +78,12 @@ class InputLokasi : AppCompatActivity() {
                         return@setOnClickListener
                     }
                 }
+                dataTemp.provinsi = selected_province
+                dataTemp.kota = selected_regency
+                dataTemp.kecamatan = selected_district
+                dataTemp.alamat = alamat.text.toString()
+                dataTemp.kodePos = kodePos.text.toString()
+
                 intent.putExtra("temp", dataTemp as Serializable)
                 startActivity(intent)
             }
@@ -106,6 +126,8 @@ class InputLokasi : AppCompatActivity() {
                             if (position != 0) {
                                 var selectedProvinceId = result?.get(position - 1)?.id.toString()
                                 selected_province = result?.get(position - 1)?.name.toString()
+
+                                resetRegencyAndDistrictForms()
 
                                 binding.listKabupaten.isEnabled = true
                                 fetchRegencies(selectedProvinceId)
@@ -214,4 +236,12 @@ class InputLokasi : AppCompatActivity() {
             }
         })
     }
+    private fun resetRegencyAndDistrictForms() {
+        binding.listKabupaten.setSelection(0)
+        binding.listKabupaten.isEnabled = false
+
+        binding.listKecamatan.setSelection(0)
+        binding.listKecamatan.isEnabled = false
+    }
+
 }

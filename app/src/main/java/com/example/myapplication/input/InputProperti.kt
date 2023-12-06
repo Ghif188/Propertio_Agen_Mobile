@@ -49,11 +49,22 @@ class InputProperti : AppCompatActivity() {
 
             val dataTemp = FormProperti()
             btnNext.setOnClickListener {
+                if (txtBeritaUtama.text.toString().isEmpty()) {
+                    Toast.makeText(this@InputProperti, "Silahkan masukkan berita properti", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (txtJudulProperti.text.toString().isEmpty()) {
+                    Toast.makeText(this@InputProperti, "Silahkan masukkan judul properti", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
                 dataTemp.beritaProperti = txtBeritaUtama.text.toString()
                 dataTemp.judulProperti = txtJudulProperti.text.toString()
                 dataTemp.tipeProperti= selected_tipe_properti
                 dataTemp.tipeIklan = selected_tipe_iklan
                 dataTemp.tipeSertifikat = selected_sertifikat
+
                 val intentToInputLokasi = Intent(this@InputProperti, InputLokasi::class.java)
                 intentToInputLokasi.putExtra("temp", dataTemp as Serializable)
                 startActivity(intentToInputLokasi)

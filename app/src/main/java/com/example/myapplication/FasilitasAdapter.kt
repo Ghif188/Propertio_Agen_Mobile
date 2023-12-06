@@ -4,21 +4,35 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ListFasilitasBinding
-import com.example.myapplication.databinding.ListPesanBinding
-import com.squareup.picasso.Picasso
 
-typealias onClickFasilitas = (Fasilitas) -> Unit
+typealias onClickFasilitas = (Fasilitas, isChecked: Boolean) -> Unit
 
 class FasilitasAdapter (
     private val listDisaster: List<Fasilitas>,
     private val onClickDisaster: onClickFasilitas) : RecyclerView.Adapter<FasilitasAdapter.ItemDisasterViewHolder>() {
+    private val selectedItems = HashSet<Int>()
         inner class ItemDisasterViewHolder(private val binding : ListFasilitasBinding) :
             RecyclerView.ViewHolder(binding.root){
             fun bind (data: Fasilitas){
-                with(binding){
-                    namaFasilitas.text = data.nama_fasilitas
-                    itemView.setOnClickListener{
-                        onClickDisaster(data)
+                with(binding) {
+                    namaFasilitas.text = data.name
+                    checkBox.isChecked = data.isChecked
+
+                    itemView.setOnClickListener {
+                        checkBox.isChecked = !checkBox.isChecked
+                        data.isChecked = checkBox.isChecked
+                        onClickDisaster(data, checkBox.isChecked)
+                    }
+
+                    checkBox.setOnCheckedChangeListener { _, isChecked ->
+                        data.isChecked = isChecked
+                        if (isChecked) {
+                            data.id?.let { selectedItems.add(it) }
+                        } else {
+                            selectedItems.remove(data.id)
+                        }
+
+                        onClickDisaster(data, isChecked)
                     }
                 }
             }
@@ -34,4 +48,8 @@ class FasilitasAdapter (
         override fun onBindViewHolder(holder: ItemDisasterViewHolder, position: Int) {
             holder.bind(listDisaster[position])
         }
+
+    fun getSelectedItems(): Set<Int> {
+        return selectedItems
+    }
 }

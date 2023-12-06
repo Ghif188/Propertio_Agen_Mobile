@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Toast
 import com.example.myapplication.databinding.ActivityInputRuangUsahaBinding
 import com.example.myapplication.model.FormDetailProperti
 import com.example.myapplication.model.FormProperti
@@ -31,13 +33,18 @@ class InputRuangUsaha : AppCompatActivity() {
 
         with(binding){
             btnNext.setOnClickListener {
+                if (harga.text.isEmpty()) {
+                    Toast.makeText(this@InputRuangUsaha, "Masukkan harga jual ruang usaha", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
                 var detailTemp = FormDetailProperti()
 
                 detailTemp.deskripsi = deskripsi.text.toString()
-                detailTemp.luasBangunan = luasBangunan.text.toString().toInt()
-                detailTemp.jmlKamarMandi = kamarMandi.text.toString().toInt()
-                detailTemp.tahunDibangun = tahunDibangun.text.toString().toInt()
-                detailTemp.harga = harga.text.toString().toInt()
+                detailTemp.luasBangunan = parseToInt(luasBangunan)
+                detailTemp.jmlKamarMandi = parseToInt(kamarMandi)
+                detailTemp.tahunDibangun = parseToInt(tahunDibangun)
+                detailTemp.harga = parseToInt(harga)
                 detailTemp.tempatParkir = tempatParkir.selectedItem.toString()
                 detailTemp.posisi = posisiSpinner.selectedItem.toString()
                 detailTemp.tipeHarga = tipeHarga.selectedItem.toString()
@@ -111,6 +118,14 @@ class InputRuangUsaha : AppCompatActivity() {
                 posisi)
             posisiAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             posisiSpinner.adapter = jalanAdapter
+        }
+    }
+
+    private fun parseToInt(editText: EditText) : Int {
+        return if (editText.text.isEmpty()) {
+            0
+        } else {
+            editText.text.toString().toInt()
         }
     }
 }

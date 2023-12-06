@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Toast
 import com.example.myapplication.input.InputLokasi
 import com.example.myapplication.input.InputVideo
 import com.example.myapplication.databinding.ActivityInputApartemenBinding
@@ -34,14 +36,19 @@ class InputApartemen : AppCompatActivity() {
 
         with(binding){
             btnNext.setOnClickListener {
+                if (harga.text.isEmpty()) {
+                    Toast.makeText(this@InputApartemen, "Masukkan harga apartemen terlebih dahulu", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
                 var detailTemp = FormDetailProperti()
 
                 detailTemp.deskripsi = deskripsi.text.toString()
-                detailTemp.luasBangunan = luasBangunan.text.toString().toInt()
-                detailTemp.jmlKamar = kamar.text.toString().toInt()
-                detailTemp.jmlKamarMandi = kamarMandi.text.toString().toInt()
-                detailTemp.tahunDibangun = tahunDibangun.text.toString().toInt()
-                detailTemp.harga = harga.text.toString().toInt()
+                detailTemp.luasBangunan = parseToInt(luasBangunan)
+                detailTemp.jmlKamar = parseToInt(kamar)
+                detailTemp.jmlKamarMandi = parseToInt(kamarMandi)
+                detailTemp.tahunDibangun = parseToInt(tahunDibangun)
+                detailTemp.harga = parseToInt(harga)
                 detailTemp.tempatParkir = tempatParkir.selectedItem.toString()
                 detailTemp.posisi = posisiSpinner.selectedItem.toString()
                 detailTemp.tipeHarga = tipeHarga.selectedItem.toString()
@@ -108,6 +115,14 @@ class InputApartemen : AppCompatActivity() {
                 akses_jalan)
             jalanAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             aksesJalan.adapter = jalanAdapter
+        }
+    }
+
+    private fun parseToInt(editText: EditText) : Int {
+        return if (editText.text.isEmpty()) {
+            0
+        } else {
+            editText.text.toString().toInt()
         }
     }
 }

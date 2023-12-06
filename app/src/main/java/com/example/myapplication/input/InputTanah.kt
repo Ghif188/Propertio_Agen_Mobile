@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Toast
 import com.example.myapplication.databinding.ActivityInputTanahBinding
 import com.example.myapplication.model.FormDetailProperti
 import com.example.myapplication.model.FormProperti
@@ -23,16 +25,21 @@ class InputTanah : AppCompatActivity() {
         val dataTemp = intent.extras?.get("temp") as FormProperti
 
         with(binding){
-            var detailTemp = FormDetailProperti()
-
-            detailTemp.deskripsi = deskripsi.text.toString()
-            detailTemp.luasTanah = luasTanah.text.toString().toInt()
-            detailTemp.harga = harga.text.toString().toInt()
-            detailTemp.tipeHarga = tipeHarga.selectedItem.toString()
-            detailTemp.aksesJalan = aksesJalan.selectedItem.toString()
-
-            dataTemp.detailProperti = detailTemp
             btnNext.setOnClickListener {
+                if (harga.text.isEmpty()) {
+                    Toast.makeText(this@InputTanah, "Masukkan harga jual tanah", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                var detailTemp = FormDetailProperti()
+
+                detailTemp.deskripsi = deskripsi.text.toString()
+                detailTemp.luasTanah = parseToInt(luasTanah)
+                detailTemp.harga = parseToInt(harga)
+                detailTemp.tipeHarga = tipeHarga.selectedItem.toString()
+                detailTemp.aksesJalan = aksesJalan.selectedItem.toString()
+
+                dataTemp.detailProperti = detailTemp
+
                 val intentToInputVideo = Intent(this@InputTanah, InputVideo::class.java)
                 intentToInputVideo.putExtra("temp", dataTemp as Serializable)
                 startActivity(intentToInputVideo)
@@ -53,6 +60,14 @@ class InputTanah : AppCompatActivity() {
                 akses_jalan)
             jalanAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             aksesJalan.adapter = jalanAdapter
+        }
+    }
+
+    private fun parseToInt(editText: EditText) : Int {
+        return if (editText.text.isEmpty()) {
+            0
+        } else {
+            editText.text.toString().toInt()
         }
     }
 }

@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Toast
 import com.example.myapplication.databinding.ActivityInputRukoBinding
 import com.example.myapplication.model.FormDetailProperti
 import com.example.myapplication.model.FormProperti
@@ -31,16 +33,21 @@ class InputRuko : AppCompatActivity() {
 
         with(binding){
             btnNext.setOnClickListener {
+                if (harga.text.isEmpty()) {
+                    Toast.makeText(this@InputRuko, "Masukkan harga jual ruko", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
                 var detailTemp = FormDetailProperti()
 
                 detailTemp.deskripsi = deskripsi.text.toString()
-                detailTemp.luasTanah = luasTanah.text.toString().toInt()
-                detailTemp.luasBangunan = luasBangunan.text.toString().toInt()
-                detailTemp.jmlKamar = kamar.text.toString().toInt()
-                detailTemp.jmlKamarMandi = kamarMandi.text.toString().toInt()
-                detailTemp.jmlLantai = jmlLantai.text.toString().toInt()
-                detailTemp.tahunDibangun = tahunDibangun.text.toString().toInt()
-                detailTemp.harga = harga.text.toString().toInt()
+                detailTemp.luasTanah = parseToInt(luasTanah)
+                detailTemp.luasBangunan = parseToInt(luasBangunan)
+                detailTemp.jmlKamar = parseToInt(kamar)
+                detailTemp.jmlKamarMandi = parseToInt(kamarMandi)
+                detailTemp.jmlLantai = parseToInt(jmlLantai)
+                detailTemp.tahunDibangun = parseToInt(tahunDibangun)
+                detailTemp.harga = parseToInt(harga)
                 detailTemp.tempatParkir = tempatParkir.selectedItem.toString()
                 detailTemp.posisi = posisiSpinner.selectedItem.toString()
                 detailTemp.tipeHarga = tipeHarga.selectedItem.toString()
@@ -114,6 +121,14 @@ class InputRuko : AppCompatActivity() {
                 posisi)
             posisiAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             posisiSpinner.adapter = jalanAdapter
+        }
+    }
+
+    private fun parseToInt(editText: EditText) : Int {
+        return if (editText.text.isEmpty()) {
+            0
+        } else {
+            editText.text.toString().toInt()
         }
     }
 }

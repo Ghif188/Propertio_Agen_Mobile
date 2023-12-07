@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ListFasilitasBinding
+import com.example.myapplication.model.Fasilitas
 
 typealias onClickFasilitas = (Fasilitas, isChecked: Boolean) -> Unit
 

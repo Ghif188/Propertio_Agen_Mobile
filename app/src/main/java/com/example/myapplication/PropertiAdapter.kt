@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.crud.PropertyHandler
 import com.example.myapplication.databinding.ListPropertyBinding
 import com.example.myapplication.model.Properti
 import com.squareup.picasso.Picasso
@@ -13,7 +14,9 @@ import com.squareup.picasso.Picasso
 typealias onClickDisaster = (Properti) -> Unit
 
 class PropertiAdapter (
-    private val onClickDisaster: onClickDisaster) : RecyclerView.Adapter<PropertiAdapter.ItemDisasterViewHolder>() {
+    private val onClickDisaster: onClickDisaster,
+    private val onItemClick: (String) -> Unit
+) : RecyclerView.Adapter<PropertiAdapter.ItemDisasterViewHolder>() {
     private var listDisaster: List<Properti> = listOf()
 
     fun setData(list: List<Properti>){
@@ -37,25 +40,26 @@ class PropertiAdapter (
                 val sukaTxt = data.disukai.toString() + " disukai"
                 penyuka.text = sukaTxt
                 alamat.text = data.lokasiProperti
-                btnDetail.setOnClickListener{
+                btnDetail.setOnClickListener {
                     onClickDisaster(data)
+                    onItemClick.invoke(data.idProperti.toString())
                 }
                 btnMenu.setOnClickListener {
-                    popupMenus(it)
+                    data.idProperti?.let { it1 -> popupMenus(it, it1) }
                 }
             }
         }
-        private fun popupMenus(v: View){
+        private fun popupMenus(v: View, propertyId: Int){
             val popupMenus = PopupMenu(itemView.context,v)
             popupMenus.inflate(R.menu.property_menu)
             popupMenus.setOnMenuItemClickListener {
                 when(it.itemId){
                     R.id.edit_properti->{
-                        Toast.makeText(itemView.context, "HALO", Toast.LENGTH_SHORT).show()
+                        editProperty(propertyId)
                         true
                     }
                     R.id.hapus_properti->{
-                        Toast.makeText(itemView.context, "HALO3", Toast.LENGTH_SHORT).show()
+                        deleteProperty(propertyId)
                         true
                     }
                     else->true
@@ -67,6 +71,15 @@ class PropertiAdapter (
             val menu = popup.get(popupMenus)
             menu.javaClass.getDeclaredMethod("setForceShowIcon", Boolean::class.java)
                 .invoke(menu, true)
+        }
+
+        private fun editProperty(id: Int) {
+            val property = PropertyHandler(itemView.context)
+            property.updateProperty(id)
+        }
+        private fun deleteProperty(id: Int) {
+            val property = PropertyHandler(itemView.context)
+            property.destroyProperty(id)
         }
     }
 

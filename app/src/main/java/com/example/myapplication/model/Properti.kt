@@ -1,6 +1,7 @@
 package com.example.myapplication.model
 
 data class Properti (
+    val idProperti: Int? = 0,
     val imgProperti: String? ="",
     val judulProperti: String? ="",
     val lokasiProperti: String? ="",

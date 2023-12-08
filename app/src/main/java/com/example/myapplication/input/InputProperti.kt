@@ -61,7 +61,8 @@ class InputProperti : AppCompatActivity() {
 
                 dataTemp.beritaProperti = txtBeritaUtama.text.toString()
                 dataTemp.judulProperti = txtJudulProperti.text.toString()
-                dataTemp.tipeProperti= selected_tipe_properti
+                dataTemp.tipeProperti= selected_tipe_properti_id.toString()
+                dataTemp.tipePropertiTeks = selected_tipe_properti.toString()
                 dataTemp.tipeIklan = selected_tipe_iklan
                 dataTemp.tipeSertifikat = selected_sertifikat
 

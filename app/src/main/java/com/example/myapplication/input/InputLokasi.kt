@@ -62,7 +62,7 @@ class InputLokasi : AppCompatActivity() {
                 }
 
                 val intent: Intent
-                when (dataTemp.tipeProperti) {
+                when (dataTemp.tipePropertiTeks) {
                     "Apartemen" -> {intent = Intent(this@InputLokasi, InputApartemen::class.java)}
                     "Gudang" -> {intent = Intent(this@InputLokasi, InputGudang::class.java)}
                     "Perkantoran" -> {intent = Intent(this@InputLokasi, InputKantor::class.java)}

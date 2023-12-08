@@ -6,6 +6,7 @@ data class FormProperti (
     var beritaProperti: String? ="",
     var judulProperti: String? ="",
     var tipeProperti: String? ="",
+    var tipePropertiTeks: String? = "",
     var tipeSertifikat: String? ="",
     var tipeIklan: String? ="",
     var provinsi: String? ="",

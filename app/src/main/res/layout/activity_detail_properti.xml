@@ -68,12 +68,14 @@
                             android:src="@drawable/ic_home"
                             android:layout_marginRight="5dp"/>
                         <TextView
+                            android:id="@+id/property_type"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Rumah"
                             android:fontFamily="@font/poppins_semibold"/>
                     </LinearLayout>
                     <TextView
+                        android:id="@+id/listing_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Listing Type"
@@ -81,12 +83,14 @@
                         android:background="@drawable/bg_kategori_detail"/>
                 </LinearLayout>
                 <TextView
+                    android:id="@+id/headline_property"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Headline Properti"
                     android:textSize="20dp"
                     android:fontFamily="@font/poppins_black"/>
                 <TextView
+                    android:id="@+id/price_property"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Rp. 100 Juta"
@@ -94,13 +98,14 @@
                     android:layout_marginBottom="15dp"
                     android:fontFamily="@font/poppins_semibold"/>
                 <TextView
+                    android:id="@+id/location_property"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lokasi"
                     android:textSize="17dp"
                     android:fontFamily="@font/poppins_semibold"/>
                 <TextView
-                    android:id="@+id/deskripsi"
+                    android:id="@+id/description_property"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_reguler"
@@ -116,6 +121,7 @@
                     android:textSize="17dp"
                     android:fontFamily="@font/poppins_semibold"/>
                 <TextView
+                    android:id="@+id/certificate_property"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_reguler"
@@ -138,6 +144,7 @@
                             android:src="@drawable/ic_home"
                             android:layout_marginRight="5dp"/>
                         <TextView
+                            android:id="@+id/jumlah_kamar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="2 Kamar"
@@ -154,6 +161,7 @@
                             android:src="@drawable/ic_home"
                             android:layout_marginRight="5dp"/>
                         <TextView
+                            android:id="@+id/jumlah_kamar_mandi"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="3 Kamar Mandi"
@@ -168,6 +176,7 @@
                             android:src="@drawable/ic_home"
                             android:layout_marginRight="5dp"/>
                         <TextView
+                            android:id="@+id/luas_bangunan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="150m"

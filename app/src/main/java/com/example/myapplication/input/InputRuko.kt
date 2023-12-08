@@ -114,13 +114,13 @@ class InputRuko : AppCompatActivity() {
                 R.layout.simple_spinner_dropdown_item,
                 menghadap)
             menghadapAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            menghadapSpinner.adapter = jalanAdapter
+            menghadapSpinner.adapter = menghadapAdapter
 
             val posisiAdapter = ArrayAdapter(this@InputRuko,
                 R.layout.simple_spinner_dropdown_item,
                 posisi)
             posisiAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            posisiSpinner.adapter = jalanAdapter
+            posisiSpinner.adapter = posisiAdapter
         }
     }
 

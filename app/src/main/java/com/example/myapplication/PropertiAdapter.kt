@@ -44,6 +44,9 @@ class PropertiAdapter (
                     onClickDisaster(data)
                     onItemClick.invoke(data.idProperti.toString())
                 }
+                btnRepost.setOnClickListener {
+                    data.idProperti?.let { it2 -> repostProperty(it2) }
+                }
                 btnMenu.setOnClickListener {
                     data.idProperti?.let { it1 -> popupMenus(it, it1) }
                 }
@@ -80,6 +83,11 @@ class PropertiAdapter (
         private fun deleteProperty(id: Int) {
             val property = PropertyHandler(itemView.context)
             property.destroyProperty(id)
+        }
+
+        private fun repostProperty(id: Int) {
+            val property = PropertyHandler(itemView.context)
+            property.repostProperty(id)
         }
     }
 

@@ -47,4 +47,8 @@ class StorePropertyLocationRequest {
     @SerializedName("listing_class")
     @Expose
     var listing_class: String? = null
+
+    @SerializedName("status")
+    @Expose
+    var status : String? = null
 }

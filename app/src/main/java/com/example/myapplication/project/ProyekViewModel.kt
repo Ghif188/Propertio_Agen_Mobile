@@ -2,7 +2,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.api.property.PropertyApi
-import com.example.myapplication.api.property.PropertyResponse
+import com.example.myapplication.api.property.storeResponse.PropertyResponse
 import com.example.myapplication.model.Properti
 import retrofit2.Call
 import retrofit2.Callback

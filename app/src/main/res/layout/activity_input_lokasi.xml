@@ -189,6 +189,7 @@
                     android:fontFamily="@font/poppins_reguler"/>
                 <EditText
                     android:id="@+id/kode_pos"
+                    android:inputType="number"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/bg_edit_text"

@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import com.example.myapplication.api.Retrofit
-import com.example.myapplication.api.property.DelPropertyResponse
+import com.example.myapplication.api.property.DeletePropertyResponse
 import com.example.myapplication.api.property.PropertyApi
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,10 +19,10 @@ class PropertyHandler (private val context: Context) {
         val token = sharedPref?.getString("token", "")
         val retro = Retrofit(token).getRetroClientInstance().create(PropertyApi::class.java)
 
-        retro.deleteProperty(id.toString()).enqueue(object : Callback<DelPropertyResponse>{
+        retro.deleteProperty(id.toString()).enqueue(object : Callback<DeletePropertyResponse>{
             override fun onResponse(
-                call: Call<DelPropertyResponse>,
-                response: Response<DelPropertyResponse>
+                call: Call<DeletePropertyResponse>,
+                response: Response<DeletePropertyResponse>
             ) {
                 val result = response.body()
                 Log.d("DeleteProperty", "Response : ${result?.message}")
@@ -34,7 +34,7 @@ class PropertyHandler (private val context: Context) {
                 }
             }
 
-            override fun onFailure(call: Call<DelPropertyResponse>, t: Throwable) {
+            override fun onFailure(call: Call<DeletePropertyResponse>, t: Throwable) {
                 Log.e("ApiCall DeleteProperty", "onFailure: ${t.message}")
             }
 

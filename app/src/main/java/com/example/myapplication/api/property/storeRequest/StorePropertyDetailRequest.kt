@@ -8,9 +8,9 @@ class StorePropertyDetailRequest {
     @Expose
     var property_id: String? = null
 
-    @SerializedName("prize")
+    @SerializedName("price")
     @Expose
-    var prize: String? = null
+    var price: String? = null
 
     @SerializedName("price_type")
     @Expose
@@ -22,11 +22,11 @@ class StorePropertyDetailRequest {
 
     @SerializedName("surface_area")
     @Expose
-    var surface_area: String? = null
+    var surface_area: Int? = 0
 
     @SerializedName("building_area")
     @Expose
-    var building_area: String? = null
+    var building_area: Int? = 0
 
     @SerializedName("floor")
     @Expose

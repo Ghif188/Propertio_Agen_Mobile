@@ -9,19 +9,23 @@ import com.squareup.picasso.Picasso
 
 typealias onClickPesan = (Pesan) -> Unit
 
-class PesanAdapter (
-    private val listDisaster: List<Pesan>,
-    private val onClickDisaster: onClickPesan) : RecyclerView.Adapter<PesanAdapter.ItemDisasterViewHolder>() {
-    inner class ItemDisasterViewHolder(private val binding : ListPesanBinding) :
-        RecyclerView.ViewHolder(binding.root){
-        fun bind (data: Pesan){
-            with(binding){
+class PesanAdapter(
+    private val onClickDisaster: onClickPesan,
+    private val onItemClick: (String) -> Unit
+) : RecyclerView.Adapter<PesanAdapter.ItemDisasterViewHolder>() {
+    private var listDisaster: List<Pesan> = listOf()
+    private var itemClickListener: ((String) -> Unit)? = null
+    inner class ItemDisasterViewHolder(private val binding: ListPesanBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(data: Pesan) {
+            with(binding) {
                 Picasso.get().load(data.imgPengirim).into(imgProfil)
                 subjekPesan.text = data.judulPesan
                 namaPengirim.text = data.namaPengirim
                 waktu.text = data.jamPesan
-                itemView.setOnClickListener{
-                    onClickDisaster(data)
+                itemView.setOnClickListener {
+                    data.idPesan?.let { it1 -> onItemClick(it1) }
                 }
             }
         }
@@ -37,4 +41,13 @@ class PesanAdapter (
     override fun onBindViewHolder(holder: ItemDisasterViewHolder, position: Int) {
         holder.bind(listDisaster[position])
     }
+
+    fun submitList(newList: List<Pesan>) {
+        listDisaster = newList
+        notifyDataSetChanged()
+    }
+    fun setOnItemClickListener(listener: (String) -> Unit) {
+        this.itemClickListener = listener
+    }
+
 }

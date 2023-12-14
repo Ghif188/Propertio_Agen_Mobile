@@ -68,6 +68,7 @@
                     android:text="ID Akun"
                     android:layout_marginBottom="5dp"/>
                 <TextView
+                    android:id="@+id/txt_id_account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ID Akun"
@@ -81,6 +82,7 @@
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/poppins_reguler"/>
                 <TextView
+                    android:id="@+id/txt_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="email@gmail.com"
@@ -103,7 +105,7 @@
                         android:text="*"/>
                 </LinearLayout>
                 <EditText
-                    android:id="@+id/username"
+                    android:id="@+id/txt_nama_lengkap"
                     android:inputType="textEmailAddress"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -155,7 +157,7 @@
                             android:layout_gravity="center_vertical"/>
                         <EditText
                             android:layout_weight="3"
-                            android:id="@+id/no_telp"
+                            android:id="@+id/txt_no_telp"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginRight="4dp"
@@ -244,6 +246,7 @@
                                 android:text="*"/>
                         </LinearLayout>
                         <EditText
+                            android:id="@+id/txt_alamat"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textMultiLine"

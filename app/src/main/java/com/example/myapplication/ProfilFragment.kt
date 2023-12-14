@@ -16,18 +16,19 @@ import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment
-import androidx.recyclerview.widget.GridLayoutManager
-import com.example.myapplication.databinding.FragmentPesanBinding
+import com.example.myapplication.api.Retrofit
+import com.example.myapplication.api.profile.DetailProfileResponse
+import com.example.myapplication.api.profile.ProfileApi
 import com.example.myapplication.databinding.FragmentProfilBinding
-import com.example.myapplication.databinding.LogoutPopupBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class ProfilFragment : Fragment() {
     private lateinit var binding: FragmentProfilBinding
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -45,6 +46,9 @@ class ProfilFragment : Fragment() {
     ): View? {
         binding = FragmentProfilBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        getProfile()
+
         val intentToChangePass = Intent(activity, ChangePass::class.java)
         binding.ubahKataSandi.setOnClickListener {
             startActivity(intentToChangePass)
@@ -91,14 +95,38 @@ class ProfilFragment : Fragment() {
         }
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfilFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun getProfile() {
+        val sharedPref = context?.getSharedPreferences("account_data", Context.MODE_PRIVATE)
+        val token = sharedPref?.getString("token", "")
+        val retro = Retrofit(token).getRetroClientInstance().create(ProfileApi::class.java)
+
+        retro.getDetailProfile().enqueue(object : Callback<DetailProfileResponse> {
+            override fun onResponse(
+                call: Call<DetailProfileResponse>,
+                response: Response<DetailProfileResponse>
+            ) {
+                val result = response.body()
+                Log.d("ApiCall DetailProfile", "Response : ${result?.message}")
+
+                if(response.isSuccessful) {
+                    val profile = result?.data
+                    val user = profile?.user_data
+
+                    with(binding) {
+                        txtIdAccount.text = profile?.account_id
+                        txtEmail.text = profile?.email
+                        txtNamaLengkap.setText(user?.full_name)
+                        txtNoTelp.setText(user?.phone)
+                        txtAlamat.setText(user?.address)
+                    }
+                } else if (response.code() == 401) {
+                    Toast.makeText(requireContext(), "Silakan login ulang", Toast.LENGTH_SHORT).show()
                 }
             }
+
+            override fun onFailure(call: Call<DetailProfileResponse>, t: Throwable) {
+                Log.e("ApiCall DetailProfile", "Error : ${t.message}")
+            }
+        })
     }
 }

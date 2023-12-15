@@ -1,11 +1,10 @@
 package com.example.myapplication.api.register
 
-import com.example.myapplication.Register
 import com.example.myapplication.api.models.DefaultResponse
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class Response: DefaultResponse(){
+class RegisterResponse: DefaultResponse(){
 	@SerializedName("data")
 	@Expose
 	var data: RegisterResponse? = null
@@ -15,7 +14,7 @@ class Response: DefaultResponse(){
 		@Expose
 		var user: User? = null
 
-		@SerializedName("token")
+		@SerializedName("userData")
 		@Expose
 		var userData: UserData? = null
 

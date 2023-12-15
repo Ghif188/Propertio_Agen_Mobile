@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.io.File
 
-class ReqisterRequest {
+class RegisterRequest {
     @SerializedName("email")
     @Expose
     var email: String? = null
@@ -29,11 +29,9 @@ class ReqisterRequest {
     @Expose
     var phone: String? = null
 
-
     @SerializedName("city")
     @Expose
     var city: String? = null
-
 
     @SerializedName("province")
     @Expose
@@ -49,7 +47,7 @@ class ReqisterRequest {
 
     @SerializedName("picture_profile_file")
     @Expose
-    var picture_profile_file: File? = null
+    var picture_profile_file: String? = null
 
     @SerializedName("address")
     @Expose

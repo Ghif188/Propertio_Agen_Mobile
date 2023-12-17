@@ -41,7 +41,7 @@ class DetailProperti : AppCompatActivity() {
                         listingType.text = data?.listing_type
                         headlineProperty.text = data?.headline
                         priceProperty.text = "Rp. " + data?.price
-                        var lokasi = data?.location?.district + data?.location?.city + data?.location?.province
+                        var lokasi = data?.location?.district + " " + data?.location?.city + " " + data?.location?.province
                         locationProperty.text = lokasi
                         descriptionProperty.text = "deskripsi property"
                         certificateProperty.text = data?.certificate

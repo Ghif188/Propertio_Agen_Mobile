@@ -16,6 +16,7 @@ import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.myapplication.api.Retrofit
 import com.example.myapplication.api.profile.DetailProfileResponse
 import com.example.myapplication.api.profile.ProfileApi
@@ -115,9 +116,14 @@ class ProfilFragment : Fragment() {
                     with(binding) {
                         txtIdAccount.text = profile?.account_id
                         txtEmail.text = profile?.email
-                        txtNamaLengkap.setText(user?.full_name)
-                        txtNoTelp.setText(user?.phone)
-                        txtAlamat.setText(user?.address)
+                        txtNamaLengkap.text = user?.full_name
+                        txtNomor.text = user?.phone
+                        txtProvinsi.text = user?.province
+                        txtKota.text = user?.city
+                        txtAlamat.text = user?.address
+                        Glide.with(requireContext())
+                            .load(user?.picture_profile)
+                            .into(imageProfile)
                     }
                 } else if (response.code() == 401) {
                     Toast.makeText(requireContext(), "Silakan login ulang", Toast.LENGTH_SHORT).show()

@@ -31,6 +31,7 @@ class ProyekViewModel : ViewModel() {
                                     idProperti = i.id,
                                     imgProperti = i.photo,
                                     judulProperti = i.title,
+                                    hargaProperti = i.price,
                                     lokasiProperti = full_address,
                                     ketProperti = "keterangan",
                                     tipeProperti = i.property_type,

@@ -57,6 +57,11 @@ class ProfilFragment : Fragment() {
         binding.btnLogout.setOnClickListener {
             popupLogout()
         }
+
+        val intentToEditProfile = Intent(activity, EditProfile::class.java)
+        binding.ubahProfile.setOnClickListener {
+            startActivity(intentToEditProfile)
+        }
         return view
     }
 

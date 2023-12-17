@@ -4,8 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_list_properti"
     android:padding="15dp"
-    android:orientation="vertical"
-    android:layout_marginBottom="15dp">
+    android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +24,7 @@
     <ImageView
         android:id="@+id/thumbnail"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="230dp"
         android:src="@drawable/ilus_carousel_detail"
         android:scaleType="fitCenter"
         android:layout_marginBottom="20dp"/>
@@ -159,5 +158,16 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:fontFamily="@font/poppins_reguler"
+        android:textSize="17dp"
+        android:layout_marginBottom="10dp"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_change_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_btn_black"
+        android:text="Ubah Status"
+        android:textAllCaps="false"
+        android:fontFamily="@font/poppins_reguler"
+        android:textColor="@color/white"
         android:textSize="17dp"/>
 </LinearLayout>

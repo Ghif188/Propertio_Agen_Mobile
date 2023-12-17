@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.api.Retrofit
 import com.example.myapplication.api.message.MessageApi
 import com.example.myapplication.databinding.FragmentPesanBinding
-import com.example.myapplication.project.PesanViewModel
+import com.example.myapplication.viewmodel.PesanViewModel
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"

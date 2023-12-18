@@ -1,6 +1,6 @@
 package com.example.myapplication
 
-import ProyekViewModel
+import ProjectViewModel
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -23,7 +23,7 @@ class ProyekFragment : Fragment() {
     private lateinit var binding: FragmentProyekBinding
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var viewModel: ProyekViewModel
+    private lateinit var viewModel: ProjectViewModel
     private lateinit var intentToDetail: Intent
     val propertiAdapter = PropertiAdapter(
         onClickDisaster = {},
@@ -51,7 +51,7 @@ class ProyekFragment : Fragment() {
         binding = FragmentProyekBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        viewModel = ViewModelProvider(this).get(ProyekViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ProjectViewModel::class.java)
         viewModel.propertyListLiveData.observe(viewLifecycleOwner, Observer { propertyList ->
             propertiAdapter.setData(propertyList)
         })

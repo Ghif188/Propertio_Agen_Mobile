@@ -1,6 +1,6 @@
 package com.example.myapplication
 
-import ProjectViewModel
+import com.example.myapplication.viewmodel.ProjectViewModel
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -85,16 +85,5 @@ class ProyekFragment : Fragment() {
             binding.lakuFilter.isEnabled = false
         }
         return view
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProyekFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

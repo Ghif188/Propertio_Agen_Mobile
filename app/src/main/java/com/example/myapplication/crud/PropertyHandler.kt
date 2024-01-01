@@ -1,20 +1,77 @@
 package com.example.myapplication.crud
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import com.example.myapplication.api.Retrofit
-import com.example.myapplication.api.models.DefaultResponse
 import com.example.myapplication.api.property.storeResponse.DeletePropertyResponse
 import com.example.myapplication.api.property.PropertyApi
+import com.example.myapplication.api.property.storeRequest.ChangeStatusPropertyRequest
+import com.example.myapplication.api.property.storeResponse.PropertyDetailResponse
 import com.example.myapplication.api.property.storeResponse.RepostPropertyResponse
+import com.example.myapplication.api.property.storeResponse.StatusPropertyResponse
+import com.example.myapplication.editproject.EditApartemen
+import com.example.myapplication.editproject.EditGudang
+import com.example.myapplication.input.InputApartemen
+import com.example.myapplication.input.InputGudang
+import com.example.myapplication.input.InputKantor
+import com.example.myapplication.input.InputKondominium
+import com.example.myapplication.input.InputPabrik
+import com.example.myapplication.input.InputRuangUsaha
+import com.example.myapplication.input.InputRuko
+import com.example.myapplication.input.InputRumah
+import com.example.myapplication.input.InputTanah
+import com.example.myapplication.input.InputVilla
+import com.example.myapplication.model.FormProperti
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class PropertyHandler (private val context: Context) {
     fun updateProperty(id: Int) {
-        Toast.makeText(context, "Update property ${id}", Toast.LENGTH_SHORT).show()
+        val sharedPref = context.getSharedPreferences("account_data", Context.MODE_PRIVATE)
+        val token = sharedPref?.getString("token", "")
+        val retro = Retrofit(token).getRetroClientInstance().create(PropertyApi::class.java)
+
+        retro.getSummaryProperty(id.toString()).enqueue(object : Callback<PropertyDetailResponse> {
+            override fun onResponse(
+                call: Call<PropertyDetailResponse>,
+                response: Response<PropertyDetailResponse>
+            ) {
+                val result = response.body()
+                Log.d("ApiCall SummaryProperty", "Response : ${result?.message}")
+
+                if (response.isSuccessful) {
+                    var data = result?.data
+
+                    var dataTemp = FormProperti()
+                    dataTemp.id = data?.id
+                    dataTemp.beritaProperti = data?.headline
+                    dataTemp.judulProperti = data?.title
+                    dataTemp.tipeProperti = data?.property_type?.property_type_id.toString()
+                    dataTemp.tipePropertiTeks = data?.property_type?.name
+                    dataTemp.tipeSertifikat = data?.certificate
+                    dataTemp.tipeIklan = data?.listing_type
+                    dataTemp.provinsi = data?.location?.province
+                    dataTemp.kota = data?.location?.city
+                    dataTemp.kecamatan = data?.location?.district
+                    dataTemp.alamat = data?.location?.address
+                    dataTemp.kodePos = data?.location?.postal_code
+                    dataTemp.detailProperti?.luasBangunan = data?.area?.toInt()
+                    dataTemp.detailProperti?.jmlKamar = data?.bedroom?.toInt()
+                    dataTemp.detailProperti?.jmlKamarMandi = data?.bathroom?.toInt()
+
+                } else if (response.code() == 401) {
+                    Toast.makeText(context, "Sesi telah habis, silakan login ulang", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<PropertyDetailResponse>, t: Throwable) {
+                Log.e("ApiCall SummaryProperty", "Error: ${t.message}")
+            }
+
+        })
     }
     fun destroyProperty(id: Int) {
         val sharedPref = context.getSharedPreferences("account_data", Context.MODE_PRIVATE)
@@ -65,6 +122,39 @@ class PropertyHandler (private val context: Context) {
 
             override fun onFailure(call: Call<RepostPropertyResponse>, t: Throwable) {
                 Log.e("ApiCall RepostProperty", "Error : ${t.message}")
+            }
+        })
+    }
+
+    fun changeStatus(id: Int, currentStatus: String) {
+        val request = ChangeStatusPropertyRequest()
+        if (currentStatus == "active") {
+            request.status = "not_active"
+        } else {
+            request.status = "active"
+        }
+
+        val sharedPref = context.getSharedPreferences("account_data", Context.MODE_PRIVATE)
+        val token = sharedPref?.getString("token", "")
+        val retro = Retrofit(token).getRetroClientInstance().create(PropertyApi::class.java)
+
+        retro.changeStatusProperty(id.toString(), request).enqueue(object : Callback<StatusPropertyResponse> {
+            override fun onResponse(
+                call: Call<StatusPropertyResponse>,
+                response: Response<StatusPropertyResponse>
+            ) {
+                var result = response.body()
+                Log.d("ApiCall UpdateStatusProperty", "Response : ${result?.message}")
+
+                if (response.isSuccessful) {
+                    Toast.makeText(context, "Berhasil ubah status properti", Toast.LENGTH_SHORT).show()
+                } else if (response.code() == 401) {
+                    Log.e("ApiCall UpdateStatusProperty", "onResponse: ${response.errorBody()}")
+                }
+            }
+
+            override fun onFailure(call: Call<StatusPropertyResponse>, t: Throwable) {
+                Log.e("ApiCall UpdateStatusProperty", "Error : ${t.message}")
             }
         })
     }

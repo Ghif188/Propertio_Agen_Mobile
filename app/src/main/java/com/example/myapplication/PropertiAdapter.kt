@@ -9,6 +9,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.crud.PropertyHandler
 import com.example.myapplication.databinding.ListPropertyBinding
+import com.example.myapplication.editproject.EditProperti
 import com.example.myapplication.model.Properti
 import com.squareup.picasso.Picasso
 
@@ -41,15 +42,19 @@ class PropertiAdapter (
                 val sukaTxt = data.disukai.toString() + " disukai"
                 penyuka.text = sukaTxt
                 alamat.text = data.lokasiProperti
+                timeUpdated.text = data.update
                 btnDetail.setOnClickListener {
                     onClickDisaster(data)
                     onItemClick.invoke(data.idProperti.toString())
                 }
                 btnRepost.setOnClickListener {
-                    data.idProperti?.let { it2 -> repostProperty(it2) }
+                    data.idProperti?.let { id -> repostProperty(id) }
                 }
                 btnMenu.setOnClickListener {
-                    data.idProperti?.let { it1 -> popupMenus(it, it1) }
+                    data.idProperti?.let { id -> popupMenus(it, id) }
+                }
+                btnChangeStatus.setOnClickListener {
+                    data.idProperti?.let { id -> chageStatus(id, data.statusProperti) }
                 }
             }
         }
@@ -78,10 +83,12 @@ class PropertiAdapter (
         }
 
         private fun editProperty(id: Int) {
-            val intentToEdit = Intent(itemView.context, EditProfile::class.java)
-            itemView.context.startActivity(intentToEdit)
+            Toast.makeText(itemView.context, "Fitur sedang tahap pengembangan", Toast.LENGTH_SHORT).show()
 //            val property = PropertyHandler(itemView.context)
 //            property.updateProperty(id)
+//
+//            val intentToEdit = Intent(itemView.context, EditProperti::class.java)
+//            itemView.context.startActivity(intentToEdit)
         }
         private fun deleteProperty(id: Int) {
             val property = PropertyHandler(itemView.context)
@@ -91,6 +98,13 @@ class PropertiAdapter (
         private fun repostProperty(id: Int) {
             val property = PropertyHandler(itemView.context)
             property.repostProperty(id)
+        }
+
+        private fun chageStatus(id: Int, statusProperti: String?) {
+            val property = PropertyHandler(itemView.context)
+            if (statusProperti != null) {
+                property.changeStatus(id, statusProperti)
+            }
         }
     }
 

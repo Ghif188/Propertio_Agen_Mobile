@@ -11,5 +11,6 @@ data class Properti (
     val dilihat: Int? =0,
     val tipeProperti: String? ="",
     val statusProperti: String? ="",
-    val kodeProperti: String? =""
+    val kodeProperti: String? ="",
+    val update: String? = ""
 )

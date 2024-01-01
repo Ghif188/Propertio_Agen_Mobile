@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,8 +78,10 @@ class PropertiAdapter (
         }
 
         private fun editProperty(id: Int) {
-            val property = PropertyHandler(itemView.context)
-            property.updateProperty(id)
+            val intentToEdit = Intent(itemView.context, EditProfile::class.java)
+            itemView.context.startActivity(intentToEdit)
+//            val property = PropertyHandler(itemView.context)
+//            property.updateProperty(id)
         }
         private fun deleteProperty(id: Int) {
             val property = PropertyHandler(itemView.context)

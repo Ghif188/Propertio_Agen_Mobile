@@ -42,6 +42,7 @@ class ProjectViewModel : ViewModel() {
                         }
                         propertyListLiveData.value = listData
                     }
+                    Log.e("ApiCall ListProperty", "onResponse: $properti")
                 } else if (response.code() == 401) {
                     Log.e("ApiCall ListProperty", "onResponse: ${response.errorBody()}")
                 }

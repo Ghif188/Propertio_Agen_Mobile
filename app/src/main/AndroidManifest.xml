@@ -15,6 +15,56 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".editproject.EditVilla"
+            android:exported="false" />
+        <activity
+            android:name=".editproject.EditVideo"
+            android:exported="false" />
+        <activity
+            android:name=".editproject.EditTanah"
+            android:exported="false" />
+        <activity
+            android:name=".editproject.EditSummary"
+            android:exported="false" />
+        <activity
+            android:name=".editproject.EditRumah"
+            android:exported="false" />
+        <activity
+            android:name=".editproject.EditRuko"
+            android:exported="false" />
+        <activity
+            android:name=".editproject.EditRuangUsaha"
+            android:exported="false" />
+        <activity
+            android:name=".editproject.EditPabrik"
+            android:exported="false" />
+        <activity
+            android:name=".editproject.EditKondominium"
+            android:exported="false" />
+        <activity
+            android:name=".editproject.EditFasilitasProperti"
+            android:exported="false" />
+        <activity
+            android:name=".editproject.EditKantor"
+            android:exported="false" />
+        <activity
+            android:name=".editproject.EditGudang"
+            android:exported="false" />
+        <activity
+            android:name=".editproject.EditApartemen"
+            android:exported="false"
+            android:label="@string/title_activity_edit_apartemen"
+            android:theme="@style/Theme.MyApplication" />
+        <activity
+            android:name=".editproject.EditLokasi"
+            android:exported="false" />
+        <activity
+            android:name=".editproject.EditProperti"
+            android:exported="false" />
+        <activity
+            android:name=".EditProperti"
+            android:exported="false" />
+        <activity
             android:name=".EditProfile"
             android:exported="false" />
         <activity

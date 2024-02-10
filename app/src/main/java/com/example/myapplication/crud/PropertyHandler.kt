@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.api.Retrofit
 import com.example.myapplication.api.property.storeResponse.DeletePropertyResponse
 import com.example.myapplication.api.property.PropertyApi
@@ -45,22 +46,28 @@ class PropertyHandler (private val context: Context) {
                 if (response.isSuccessful) {
                     var data = result?.data
 
-                    var dataTemp = FormProperti()
-                    dataTemp.id = data?.id
-                    dataTemp.beritaProperti = data?.headline
-                    dataTemp.judulProperti = data?.title
-                    dataTemp.tipeProperti = data?.property_type?.property_type_id.toString()
-                    dataTemp.tipePropertiTeks = data?.property_type?.name
-                    dataTemp.tipeSertifikat = data?.certificate
-                    dataTemp.tipeIklan = data?.listing_type
-                    dataTemp.provinsi = data?.location?.province
-                    dataTemp.kota = data?.location?.city
-                    dataTemp.kecamatan = data?.location?.district
-                    dataTemp.alamat = data?.location?.address
-                    dataTemp.kodePos = data?.location?.postal_code
-                    dataTemp.detailProperti?.luasBangunan = data?.area?.toInt()
-                    dataTemp.detailProperti?.jmlKamar = data?.bedroom?.toInt()
-                    dataTemp.detailProperti?.jmlKamarMandi = data?.bathroom?.toInt()
+                    val sharedPref = context.getSharedPreferences("property_data", AppCompatActivity.MODE_PRIVATE)
+                    with(sharedPref.edit()) {
+                        putString("property_id", data?.id.toString())
+                        putString("property_beritaProperti", data?.headline)
+                        putString("property_judulProperti", data?.title)
+                        putString(
+                            "property_tipeProperti",
+                            data?.property_type?.property_type_id.toString()
+                        )
+                        putString("property_tipePropertiTeks", data?.property_type?.name)
+                        putString("property_tipeSertifikat", data?.certificate)
+                        putString("property_tipeIklan", data?.listing_type)
+                        putString("property_provinsi", data?.location?.province)
+                        putString("property_kota", data?.location?.city)
+                        putString("property_kecamatan", data?.location?.district)
+                        putString("property_alamat", data?.location?.address)
+                        putString("property_kodePos", data?.location?.postal_code)
+                        putString("property_luasBangunan", data?.area)
+                        putString("property_jmlKamar", data?.bedroom)
+                        putString("property_jmlKamarMandi", data?.bathroom)
+                        commit()
+                    }
 
                 } else if (response.code() == 401) {
                     Toast.makeText(context, "Sesi telah habis, silakan login ulang", Toast.LENGTH_SHORT).show()

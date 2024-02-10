@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.crud.PropertyHandler
 import com.example.myapplication.databinding.ListPropertyBinding
 import com.example.myapplication.editproject.EditProperti
+import com.example.myapplication.input.InputProperti
 import com.example.myapplication.model.Properti
 import com.squareup.picasso.Picasso
 
@@ -83,12 +84,11 @@ class PropertiAdapter (
         }
 
         private fun editProperty(id: Int) {
-            Toast.makeText(itemView.context, "Fitur sedang tahap pengembangan", Toast.LENGTH_SHORT).show()
-//            val property = PropertyHandler(itemView.context)
-//            property.updateProperty(id)
-//
-//            val intentToEdit = Intent(itemView.context, EditProperti::class.java)
-//            itemView.context.startActivity(intentToEdit)
+            val property = PropertyHandler(itemView.context)
+            property.updateProperty(id)
+
+            val intentToEdit = Intent(itemView.context, InputProperti::class.java)
+            itemView.context.startActivity(intentToEdit)
         }
         private fun deleteProperty(id: Int) {
             val property = PropertyHandler(itemView.context)

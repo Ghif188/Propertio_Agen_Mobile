@@ -11,16 +11,13 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import com.example.myapplication.MainActivity
 import com.example.myapplication.api.Retrofit
 import com.example.myapplication.api.admin.TypeProperty
 import com.example.myapplication.api.admin.response.TypePropertyResponse
 import com.example.myapplication.databinding.ActivityInputPropertiBinding
-import com.example.myapplication.model.FormProperti
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.Serializable
 
 class InputProperti : AppCompatActivity() {
     private lateinit var binding: ActivityInputPropertiBinding
@@ -36,18 +33,37 @@ class InputProperti : AppCompatActivity() {
         val tipe_iklan = resources.getStringArray(com.example.myapplication.R.array.tipe_iklan)
         val tipe_sertifikat = resources.getStringArray(com.example.myapplication.R.array.tipe_sertifikat)
 
+        val sharedPreferences = getSharedPreferences("property_data", MODE_PRIVATE)
+        val id = sharedPreferences.getString("property_id", null)
+
         with(binding){
+            if (id != null) {
+                val property_berita = sharedPreferences.getString("property_beritaProperti", null)
+                txtBeritaUtama.setText(property_berita)
+
+                val property_judul = sharedPreferences.getString("property_judulProperti", null)
+                txtJudulProperti.setText(property_judul)
+
+                val property_tipe = sharedPreferences.getString("property_tipeProperti", null)
+                getTipeProperty(property_tipe.toString())
+
+                val tipeiklan = sharedPreferences.getString("property_tipeIklan", null)
+                getTipeIklan(tipe_iklan, tipeiklan.toString())
+
+                val tipesertifikat = sharedPreferences.getString("property_tipeSertifikat", null)
+                getSertifikat(tipe_sertifikat, tipesertifikat.toString())
+            }
+
             val filterJudul = arrayOf<InputFilter>(InputFilter.LengthFilter(100))
             txtJudulProperti.filters = filterJudul
 
             val filterBerita = arrayOf<InputFilter>(InputFilter.LengthFilter(70))
             txtBeritaUtama.filters = filterBerita
 
-            getTipeProperty()
-            getTipeIklan(tipe_iklan)
-            getSertifikat(tipe_sertifikat)
+            getTipeProperty("")
+            getTipeIklan(tipe_iklan, "")
+            getSertifikat(tipe_sertifikat, "")
 
-            val dataTemp = FormProperti()
             btnNext.setOnClickListener {
                 if (txtBeritaUtama.text.toString().isEmpty()) {
                     Toast.makeText(this@InputProperti, "Silahkan masukkan berita properti", Toast.LENGTH_SHORT).show()
@@ -59,25 +75,29 @@ class InputProperti : AppCompatActivity() {
                     return@setOnClickListener
                 }
 
-                dataTemp.beritaProperti = txtBeritaUtama.text.toString()
-                dataTemp.judulProperti = txtJudulProperti.text.toString()
-                dataTemp.tipeProperti= selected_tipe_properti_id.toString()
-                dataTemp.tipePropertiTeks = selected_tipe_properti.toString()
-                dataTemp.tipeIklan = selected_tipe_iklan
-                dataTemp.tipeSertifikat = selected_sertifikat
+                val dataTemp = getSharedPreferences("dataTemp", MODE_PRIVATE)
+                with(dataTemp.edit()) {
+                    putString("berita", txtBeritaUtama.text.toString())
+                    putString("judul", txtJudulProperti.text.toString())
+                    putString("tipe_properti", selected_tipe_properti_id.toString())
+                    putString("tipe_properti_teks", selected_tipe_properti)
+                    putString("tipe_iklan", selected_tipe_iklan)
+                    putString("tipe_sertifikat", selected_sertifikat)
+                    commit()
+                }
 
                 val intentToInputLokasi = Intent(this@InputProperti, InputLokasi::class.java)
-                intentToInputLokasi.putExtra("temp", dataTemp as Serializable)
                 startActivity(intentToInputLokasi)
             }
 
             btnBack.setOnClickListener{
+                clearPropertyData()
                 finish()
             }
         }
     }
 
-    private fun getTipeProperty() {
+    private fun getTipeProperty(id: String) {
         val sharedPref = getSharedPreferences("account_data", Context.MODE_PRIVATE)
         val token = sharedPref?.getString("token", "")
         val retro = Retrofit(token).getRetroClientInstance().create(TypeProperty::class.java)
@@ -99,7 +119,7 @@ class InputProperti : AppCompatActivity() {
                         R.layout.simple_spinner_dropdown_item,
                         tipe_properti)
 
-                    tipePropertiAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    tipePropertiAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
                     binding.tipePropertiSpinner.adapter = tipePropertiAdapter
 
                     binding.tipePropertiSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -109,6 +129,13 @@ class InputProperti : AppCompatActivity() {
                             selected_tipe_properti_id = tipePropertiList?.get(position)?.id ?: 0
                             selected_tipe_properti = tipePropertiList?.get(position)?.name ?: ""
                         }
+                    }
+                    if (id != "") {
+                        val position = tipePropertiList?.indexOfFirst { it.id == id.toInt() }
+                        if (position != null) {
+                            binding.tipePropertiSpinner.setSelection(position.toInt())
+                        }
+
                     }
                 } else if (response.code() == 401) {
                     Toast.makeText(this@InputProperti, "Silakan login ulang", Toast.LENGTH_SHORT).show()
@@ -123,7 +150,7 @@ class InputProperti : AppCompatActivity() {
         })
     }
 
-    private fun getTipeIklan(tipeIklan : Array<String>) {
+    private fun getTipeIklan(tipeIklan: Array<String>, s: String) {
         val tipeIklanAdapter  = ArrayAdapter(this@InputProperti, R.layout.simple_spinner_dropdown_item, tipeIklan)
         tipeIklanAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.tipeIklan.adapter = tipeIklanAdapter
@@ -135,9 +162,15 @@ class InputProperti : AppCompatActivity() {
 
             override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
+
+        if (s == "rent") {
+            binding.tipeIklan.setSelection(0)
+        } else {
+            binding.tipeIklan.setSelection(1)
+        }
     }
 
-    private fun getSertifikat(sertifikat : Array<String>) {
+    private fun getSertifikat(sertifikat: Array<String>, s: String) {
         val sertifikatAdapter  = ArrayAdapter(this@InputProperti, R.layout.simple_spinner_dropdown_item, sertifikat)
         sertifikatAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.sertifikat.adapter = sertifikatAdapter
@@ -148,6 +181,22 @@ class InputProperti : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {}
+        }
+
+        if (s.isNotEmpty()) {
+            val position = sertifikat.indexOf(s)
+            if (position != -1) {
+                binding.sertifikat.setSelection(position)
+                selected_sertifikat = s
+            }
+        }
+    }
+
+    private fun clearPropertyData(){
+        val sharedPreferences = getSharedPreferences("property_data", MODE_PRIVATE)
+        with(sharedPreferences!!.edit()) {
+            putString("property_id", null)
+            commit()
         }
     }
 }

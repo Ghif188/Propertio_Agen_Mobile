@@ -29,6 +29,9 @@ class InputSummary : AppCompatActivity() {
         setContentView(binding.root)
 
         val dataTemp = intent.extras?.get("temp") as FormProperti
+        val dataTempo = getSharedPreferences("dataTemp", MODE_PRIVATE)
+        val oldData = getSharedPreferences("property_data", MODE_PRIVATE)
+        val id = oldData.getString("property_id", null)
 
         with(binding){
 
@@ -38,38 +41,44 @@ class InputSummary : AppCompatActivity() {
                     .load(firstPhoto)
                     .into(headerImage)
             }
-            judulProperti.text = dataTemp.judulProperti
-            tipeProperti.text = dataTemp.tipePropertiTeks
-            listingType.text = dataTemp.tipeIklan
-            harga.text = dataTemp.detailProperti?.harga.toString()
-            var lok = dataTemp.kecamatan + ", " + dataTemp.kota + ", " + dataTemp.provinsi
+            judulProperti.text = dataTempo.getString("judul", null)
+            tipeProperti.text = dataTempo.getString("tipe_properti_teks", null)
+            listingType.text = dataTempo.getString("tipe_iklan", null)
+            harga.text = dataTempo.getInt("detail_harga", 0).toString()
+            var lok = dataTempo.getString("alamat", null) + ", " + dataTempo.getString("kecamatan", null) + ", " + dataTempo.getString("kota", null) + ", " + dataTempo.getString("provinsi", null)
             lokasi.text = lok
-            deskripsi.text = dataTemp.detailProperti?.deskripsi
-            sertifikat.text = dataTemp.tipeSertifikat
-            jumlahKamar.text = dataTemp.detailProperti?.jmlKamar.toString() + " kamar"
-            jumlahKamarMandi.text = dataTemp.detailProperti?.jmlKamarMandi.toString() + " kamar mandi"
-            luasBangunan.text = dataTemp.detailProperti?.luasBangunan.toString()
+            deskripsi.text = dataTempo.getString("detail_deskripsi", null)
+            sertifikat.text = dataTempo.getString("tipe_sertifikat", null)
+            jumlahKamar.text = dataTempo.getInt("detail_jmlKamar", 0).toString() + " kamar"
+            jumlahKamarMandi.text = dataTempo.getInt("detail_jmlKamarMandi", 0).toString() + " kamar mandi"
+            luasBangunan.text = dataTempo.getInt("detail_luasBangunan", 0).toString()
 
             btnBack.setOnClickListener {
                 finish()
             }
 
             btnNext.setOnClickListener {
-                storePropertyLocation(dataTemp)
+                if (id != null) {
+                    //
+                } else {
+                    storePropertyLocation(dataTemp)
+                }
             }
         }
     }
 
     private fun storePropertyLocation(dataTemp: FormProperti) {
+        val dataTempo = getSharedPreferences("dataTemp", MODE_PRIVATE)
+
         val request = StorePropertyLocationRequest()
-        request.headline = dataTemp.beritaProperti
-        request.title = dataTemp.judulProperti
-        request.property_type_id = dataTemp.tipeProperti
-        request.listing_type = dataTemp.tipeIklan
-        request.certificate = dataTemp.tipeSertifikat
-        request.district = dataTemp.kecamatan
-        request.city = dataTemp.kota
-        request.province = dataTemp.provinsi
+        request.headline = dataTempo.getString("berita", null)
+        request.title = dataTempo.getString("judul", null)
+        request.property_type_id = dataTempo.getString("tipe_properti", null)
+        request.listing_type = dataTempo.getString("tipe_iklan", null)
+        request.certificate = dataTempo.getString("tipe_sertifikat", null)
+        request.district = dataTempo.getString("kecamatan", null)
+        request.city = dataTempo.getString("kota", null)
+        request.province = dataTempo.getString("provinsi", null)
         request.longitude = "0.1"
         request.latitude = "0.2"
         request.status = "active"
@@ -104,24 +113,25 @@ class InputSummary : AppCompatActivity() {
     }
 
     private fun storePropertyDetail(dataTemp: FormDetailProperti, id_property: String) {
+        val dataTempo = getSharedPreferences("dataTemp", MODE_PRIVATE)
         val request = StorePropertyDetailRequest()
         request.property_id = id_property
-        request.price = dataTemp.harga.toString()
-        request.price_type = dataTemp?.tipeHarga
-        request.description = dataTemp?.deskripsi
-        request.surface_area = dataTemp?.luasTanah
-        request.building_area = dataTemp?.luasBangunan
-        request.floor = dataTemp?.jmlLantai.toString()
-        request.bedroom = dataTemp?.jmlKamar.toString()
-        request.bathroom = dataTemp?.jmlKamarMandi.toString()
-        request.garage = dataTemp?.tempatParkir
-        request.year_built = dataTemp?.tahunDibangun.toString()
-        request.position = dataTemp?.posisi
-        request.power_supply = dataTemp?.dayaListrik
-        request.condition = dataTemp?.kondisi
-        request.water_type = dataTemp?.tipeAir
-        request.facing = dataTemp?.menghadap
-        request.road_access = dataTemp?.aksesJalan
+        request.price = dataTempo.getInt("detail_harga", 0).toString()
+        request.price_type = dataTempo.getString("detail_tipeHarga", null)
+        request.description = dataTempo.getString("detail_deskripsi", null)
+        request.surface_area = dataTempo.getInt("detail_luasTanah", 0)
+        request.building_area = dataTempo.getInt("detail_luasBangunan", 0)
+        request.floor = dataTempo.getInt("detail_jmlLantai", 0).toString()
+        request.bedroom = dataTempo.getInt("detail_jmlKamar", 0).toString()
+        request.bathroom = dataTempo.getInt("detail_jmlKamarMandi", 0).toString()
+        request.garage = dataTempo.getString("detail_tempatParkir", null)
+        request.year_built = dataTempo.getString("detail_tahunDibangun", null)
+        request.position = dataTempo.getString("detail_posisi", null)
+        request.power_supply = dataTempo.getString("detail_dayaListrik", null)
+        request.condition = dataTempo.getString("detail_kondisi", null)
+        request.water_type = dataTempo.getString("detail_tipeAir", null)
+        request.facing = dataTempo.getString("detail_menghadap", null)
+        request.road_access = dataTempo.getString("detail_aksesJalan", null)
         request.quality = "100"
 
         val sharedPref = getSharedPreferences("account_data", Context.MODE_PRIVATE)
@@ -150,5 +160,9 @@ class InputSummary : AppCompatActivity() {
                 Log.e("ApiCall StorePropertyDetail", "Error : ${t.message}")
             }
         })
+    }
+
+    private fun updateProperty (id: String) {
+        //
     }
 }

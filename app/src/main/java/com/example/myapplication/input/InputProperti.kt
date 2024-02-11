@@ -195,7 +195,7 @@ class InputProperti : AppCompatActivity() {
     private fun clearPropertyData(){
         val sharedPreferences = getSharedPreferences("property_data", MODE_PRIVATE)
         with(sharedPreferences!!.edit()) {
-            putString("property_id", null)
+            clear()
             commit()
         }
     }

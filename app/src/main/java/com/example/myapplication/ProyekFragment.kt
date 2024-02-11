@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -66,6 +67,12 @@ class ProyekFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
         }
         binding.addProperty.setOnClickListener{
+            val sharedPreferences = context?.getSharedPreferences("property_data", AppCompatActivity.MODE_PRIVATE)
+            with(sharedPreferences!!.edit()) {
+                clear()
+                commit()
+            }
+
             val intentToAddProperty = Intent(activity, InputProperti::class.java)
             startActivity(intentToAddProperty)
         }

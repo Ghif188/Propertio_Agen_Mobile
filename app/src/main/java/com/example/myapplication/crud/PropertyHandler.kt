@@ -69,6 +69,10 @@ class PropertyHandler (private val context: Context) {
                         commit()
                     }
 
+                    val tokenFromPrefs = context.getSharedPreferences("property_data", AppCompatActivity.MODE_PRIVATE)
+                    val idprop = tokenFromPrefs.getString("property_id", null)
+                    Log.d("IdProperty", "property_id: $idprop")
+
                 } else if (response.code() == 401) {
                     Toast.makeText(context, "Sesi telah habis, silakan login ulang", Toast.LENGTH_SHORT).show()
                 }

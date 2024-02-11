@@ -12,8 +12,12 @@ import com.example.myapplication.api.Retrofit
 import com.example.myapplication.api.property.PropertyApi
 import com.example.myapplication.api.property.storeRequest.StorePropertyDetailRequest
 import com.example.myapplication.api.property.storeRequest.StorePropertyLocationRequest
+import com.example.myapplication.api.property.storeRequest.UpdateLocationPropertyRequest
+import com.example.myapplication.api.property.storeRequest.UpdatePropertyDetailRequest
 import com.example.myapplication.api.property.storeResponse.StorePropertyDetailResponse
 import com.example.myapplication.api.property.storeResponse.StorePropertyLocationResponse
+import com.example.myapplication.api.property.storeResponse.UpdatePropertyDetailResponse
+import com.example.myapplication.api.property.storeResponse.UpdatePropertyLocationResponse
 import com.example.myapplication.databinding.ActivityInputSummaryBinding
 import com.example.myapplication.model.FormDetailProperti
 import com.example.myapplication.model.FormProperti
@@ -59,7 +63,7 @@ class InputSummary : AppCompatActivity() {
 
             btnNext.setOnClickListener {
                 if (id != null) {
-                    //
+                    updatePropertyLocation(id)
                 } else {
                     storePropertyLocation(dataTemp)
                 }
@@ -162,7 +166,110 @@ class InputSummary : AppCompatActivity() {
         })
     }
 
-    private fun updateProperty (id: String) {
-        //
+    private fun updatePropertyLocation (id: String) {
+        val dataTempo = getSharedPreferences("dataTemp", MODE_PRIVATE)
+
+        val request = UpdateLocationPropertyRequest()
+        request.title = dataTempo.getString("judul", null)
+//        request.listing_type = dataTempo.getString("tipe_iklan", null)
+//        request.certificate = dataTempo.getString("tipe_sertifikat", null)
+        request.listing_type = "rent"
+        request.certificate = "Letter C"
+        request.district = dataTempo.getString("kecamatan", null)
+        request.city = dataTempo.getString("kota", null)
+        request.province = dataTempo.getString("provinsi", null)
+        request.longitude = "0.1"
+        request.latitude = "0.2"
+
+        val sharedPref = getSharedPreferences("account_data", Context.MODE_PRIVATE)
+        val token = sharedPref?.getString("token", "")
+        val retro = Retrofit(token).getRetroClientInstance().create(PropertyApi::class.java)
+
+        retro.updatePropertyLocation(id, request).enqueue(object : Callback<UpdatePropertyLocationResponse> {
+            override fun onResponse(
+                call: Call<UpdatePropertyLocationResponse>,
+                response: Response<UpdatePropertyLocationResponse>
+            ) {
+                val result = response.body()
+                Log.d("ApiCall UpdatePropertyLocation", "Response : ${result?.message}")
+
+                if (response.isSuccessful) {
+                    var id_properti = result?.data?.id
+                    Log.d("ApiCall UpdatePropertyLocation", "Success update location")
+
+                    val berhasil = Intent(this@InputSummary, PropertiBerhasil::class.java)
+                    startActivity(berhasil)
+//                    updatePropertyDetail(id_properti.toString())
+                } else if (response.code() == 422) {
+                    Toast.makeText(this@InputSummary, "Terdapat data yang masih belum diisi", Toast.LENGTH_SHORT).show()
+                } else if (response.code() == 401) {
+                    Toast.makeText(this@InputSummary, "Sesi telah habis, silakan login ulang", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<UpdatePropertyLocationResponse>, t: Throwable) {
+                Log.e("ApiCall UpdatePropertyUpdate", "Error : ${t.message}")
+            }
+        })
+    }
+
+    private fun updatePropertyDetail (id: String) {
+        val dataTempo = getSharedPreferences("dataTemp", MODE_PRIVATE)
+        val request = UpdatePropertyDetailRequest()
+
+        request.property_id = id
+//        request.price = dataTempo.getInt("detail_harga", 0).toString()
+//        request.price_type = dataTempo.getString("detail_tipeHarga", null)
+        request.price = "90000"
+        request.price_type = "Nego"
+        request.description = dataTempo.getString("detail_deskripsi", null)
+        request.surface_area = dataTempo.getInt("detail_luasTanah", 0)
+        request.building_area = dataTempo.getInt("detail_luasBangunan", 0)
+        request.floor = dataTempo.getInt("detail_jmlLantai", 0).toString()
+        request.bedroom = dataTempo.getInt("detail_jmlKamar", 0).toString()
+        request.bathroom = dataTempo.getInt("detail_jmlKamarMandi", 0).toString()
+        request.garage = dataTempo.getString("detail_tempatParkir", null)
+        request.year_built = dataTempo.getInt("detail_tahunDibangun", 0).toString()
+        request.position = dataTempo.getString("detail_posisi", null)
+        request.power_supply = dataTempo.getString("detail_dayaListrik", null)
+        request.condition = dataTempo.getString("detail_kondisi", null)
+        request.water_type = dataTempo.getString("detail_tipeAir", null)
+        request.facing = dataTempo.getString("detail_menghadap", null)
+        request.road_access = dataTempo.getString("detail_aksesJalan", null)
+        request.quality = "100"
+
+        val sharedPref = getSharedPreferences("account_data", Context.MODE_PRIVATE)
+        val token = sharedPref?.getString("token", "")
+        val retro = Retrofit(token).getRetroClientInstance().create(PropertyApi::class.java)
+
+        retro.updatePropertyDetail(id, request).enqueue(object : Callback<UpdatePropertyDetailResponse> {
+            override fun onResponse(
+                call: Call<UpdatePropertyDetailResponse>,
+                response: Response<UpdatePropertyDetailResponse>
+            ) {
+                val result = response.body()
+                Log.d("ApiCall UpdatePropertyDetail", "Response : ${result?.message}")
+
+                if (response.isSuccessful) {
+                    val berhasil = Intent(this@InputSummary, PropertiBerhasil::class.java)
+                    Log.d("ApiCall UpdatePropertyDetail", "Success update property detail")
+
+                    val sharedPreferences = getSharedPreferences("property_data", MODE_PRIVATE)
+                    with(sharedPreferences!!.edit()) {
+                        clear()
+                        commit()
+                    }
+                    startActivity(berhasil)
+                } else if (response.code() == 422) {
+                    Toast.makeText(this@InputSummary, "Terdapat data yang masih belum diisi", Toast.LENGTH_SHORT).show()
+                } else if (response.code() == 401) {
+                    Toast.makeText(this@InputSummary, "Sesi telah habis, silakan login ulang", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<UpdatePropertyDetailResponse>, t: Throwable) {
+                Log.e("ApiCall UpdatePropertyDetail", "Error : ${t.message}")
+            }
+        })
     }
 }

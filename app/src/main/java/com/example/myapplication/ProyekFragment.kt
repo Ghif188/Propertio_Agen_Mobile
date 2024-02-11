@@ -1,6 +1,6 @@
 package com.example.myapplication
 
-import ProjectViewModel
+import com.example.myapplication.viewmodel.ProjectViewModel
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -66,6 +67,12 @@ class ProyekFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
         }
         binding.addProperty.setOnClickListener{
+            val sharedPreferences = context?.getSharedPreferences("property_data", AppCompatActivity.MODE_PRIVATE)
+            with(sharedPreferences!!.edit()) {
+                clear()
+                commit()
+            }
+
             val intentToAddProperty = Intent(activity, InputProperti::class.java)
             startActivity(intentToAddProperty)
         }
@@ -85,16 +92,5 @@ class ProyekFragment : Fragment() {
             binding.lakuFilter.isEnabled = false
         }
         return view
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProyekFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

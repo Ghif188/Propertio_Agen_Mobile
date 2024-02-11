@@ -8,9 +8,6 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
 import com.example.myapplication.databinding.ActivityInputTanahBinding
-import com.example.myapplication.model.FormDetailProperti
-import com.example.myapplication.model.FormProperti
-import java.io.Serializable
 
 class InputTanah : AppCompatActivity() {
     private lateinit var binding: ActivityInputTanahBinding
@@ -22,7 +19,9 @@ class InputTanah : AppCompatActivity() {
         val tipe_harga = resources.getStringArray(com.example.myapplication.R.array.tipe_harga)
         val akses_jalan = resources.getStringArray(com.example.myapplication.R.array.jalan)
 
-        val dataTemp = intent.extras?.get("temp") as FormProperti
+        val dataTempo = getSharedPreferences("dataTemp", MODE_PRIVATE)
+        val oldData = getSharedPreferences("property_data", MODE_PRIVATE)
+        val idOld = oldData.getString("property_id", null)
 
         with(binding){
             btnNext.setOnClickListener {
@@ -30,18 +29,17 @@ class InputTanah : AppCompatActivity() {
                     Toast.makeText(this@InputTanah, "Masukkan harga jual tanah", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-                var detailTemp = FormDetailProperti()
 
-                detailTemp.deskripsi = deskripsi.text.toString()
-                detailTemp.luasTanah = parseToInt(luasTanah)
-                detailTemp.harga = parseToInt(harga)
-                detailTemp.tipeHarga = tipeHarga.selectedItem.toString()
-                detailTemp.aksesJalan = aksesJalan.selectedItem.toString()
-
-                dataTemp.detailProperti = detailTemp
+                with(dataTempo.edit()) {
+                    putString("detail_deskripsi", deskripsi.text.toString())
+                    putInt("detail_luasTanah", parseToInt(luasTanah))
+                    putInt("detail_harga", parseToInt(harga))
+                    putString("detail_tipeHarga", tipeHarga.selectedItem.toString())
+                    putString("detail_aksesJalan", aksesJalan.selectedItem.toString())
+                    commit()
+                }
 
                 val intentToInputVideo = Intent(this@InputTanah, InputVideo::class.java)
-                intentToInputVideo.putExtra("temp", dataTemp as Serializable)
                 startActivity(intentToInputVideo)
             }
 

@@ -33,7 +33,7 @@ class InputVideo : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val dataTemp = intent.extras?.get("temp") as FormProperti
+        val dataTempo = getSharedPreferences("dataTemp", MODE_PRIVATE)
 
         with(binding){
             btnUploadImg.setOnClickListener {
@@ -72,9 +72,14 @@ class InputVideo : AppCompatActivity() {
                     )
                 }
 
-                dataTemp.namaVirtualTour = namaVirtualTour.text.toString()
-                dataTemp.linkVideo = linkVideo.text.toString()
-                dataTemp.linkVirtualTour = linkVirtualTour.text.toString()
+                with(dataTempo.edit()) {
+                    putString("namaVirtualTour", namaVirtualTour.text.toString())
+                    putString("linkVideo", linkVideo.text.toString())
+                    putString("linkVirtualTour", linkVirtualTour.text.toString())
+                    commit()
+                }
+
+                val dataTemp = FormProperti()
                 dataTemp.fotoProperti = formFotoList
                 val intentToInputFasilitas = Intent(this@InputVideo, InputFasilitasProperti::class.java)
                 intentToInputFasilitas.putExtra("temp", dataTemp as Serializable)

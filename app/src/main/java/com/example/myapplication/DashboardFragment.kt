@@ -66,11 +66,13 @@ class DashboardFragment : Fragment() {
                         txtTertarikListing.text = data?.lead_count.toString()
                         txtPesanMasuk.text = data?.message_count.toString()
                     }
+                } else if (response.code() == 401) {
+                    Log.e("ApiCall Dashboard", "Token tidak valid")
                 }
             }
 
             override fun onFailure(call: Call<DashboardResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.e("ApiCall Dashboard", "Error: ${t.message}")
             }
         })
     }

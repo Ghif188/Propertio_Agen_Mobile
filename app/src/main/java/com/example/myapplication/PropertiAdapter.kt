@@ -1,19 +1,25 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.crud.PropertyHandler
 import com.example.myapplication.databinding.ListPropertyBinding
+import com.example.myapplication.editproject.EditProperti
+import com.example.myapplication.input.InputProperti
 import com.example.myapplication.model.Properti
 import com.squareup.picasso.Picasso
 
 typealias onClickDisaster = (Properti) -> Unit
 
 class PropertiAdapter (
-    private val onClickDisaster: onClickDisaster) : RecyclerView.Adapter<PropertiAdapter.ItemDisasterViewHolder>() {
+    private val onClickDisaster: onClickDisaster,
+    private val onItemClick: (String) -> Unit
+) : RecyclerView.Adapter<PropertiAdapter.ItemDisasterViewHolder>() {
     private var listDisaster: List<Properti> = listOf()
 
     fun setData(list: List<Properti>){
@@ -37,25 +43,33 @@ class PropertiAdapter (
                 val sukaTxt = data.disukai.toString() + " disukai"
                 penyuka.text = sukaTxt
                 alamat.text = data.lokasiProperti
-                btnDetail.setOnClickListener{
+                timeUpdated.text = data.update
+                btnDetail.setOnClickListener {
                     onClickDisaster(data)
+                    onItemClick.invoke(data.idProperti.toString())
+                }
+                btnRepost.setOnClickListener {
+                    data.idProperti?.let { id -> repostProperty(id) }
                 }
                 btnMenu.setOnClickListener {
-                    popupMenus(it)
+                    data.idProperti?.let { id -> popupMenus(it, id) }
+                }
+                btnChangeStatus.setOnClickListener {
+                    data.idProperti?.let { id -> chageStatus(id, data.statusProperti) }
                 }
             }
         }
-        private fun popupMenus(v: View){
+        private fun popupMenus(v: View, propertyId: Int){
             val popupMenus = PopupMenu(itemView.context,v)
             popupMenus.inflate(R.menu.property_menu)
             popupMenus.setOnMenuItemClickListener {
                 when(it.itemId){
                     R.id.edit_properti->{
-                        Toast.makeText(itemView.context, "HALO", Toast.LENGTH_SHORT).show()
+                        editProperty(propertyId)
                         true
                     }
                     R.id.hapus_properti->{
-                        Toast.makeText(itemView.context, "HALO3", Toast.LENGTH_SHORT).show()
+                        deleteProperty(propertyId)
                         true
                     }
                     else->true
@@ -67,6 +81,30 @@ class PropertiAdapter (
             val menu = popup.get(popupMenus)
             menu.javaClass.getDeclaredMethod("setForceShowIcon", Boolean::class.java)
                 .invoke(menu, true)
+        }
+
+        private fun editProperty(id: Int) {
+            val property = PropertyHandler(itemView.context)
+            property.updateProperty(id)
+
+            val intentToEdit = Intent(itemView.context, InputProperti::class.java)
+            itemView.context.startActivity(intentToEdit)
+        }
+        private fun deleteProperty(id: Int) {
+            val property = PropertyHandler(itemView.context)
+            property.destroyProperty(id)
+        }
+
+        private fun repostProperty(id: Int) {
+            val property = PropertyHandler(itemView.context)
+            property.repostProperty(id)
+        }
+
+        private fun chageStatus(id: Int, statusProperti: String?) {
+            val property = PropertyHandler(itemView.context)
+            if (statusProperti != null) {
+                property.changeStatus(id, statusProperti)
+            }
         }
     }
 

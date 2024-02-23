@@ -1,6 +1,7 @@
 package com.example.myapplication.model
 
 data class Properti (
+    val idProperti: Int? = 0,
     val imgProperti: String? ="",
     val judulProperti: String? ="",
     val lokasiProperti: String? ="",
@@ -10,5 +11,6 @@ data class Properti (
     val dilihat: Int? =0,
     val tipeProperti: String? ="",
     val statusProperti: String? ="",
-    val kodeProperti: String? =""
+    val kodeProperti: String? ="",
+    val update: String? = ""
 )

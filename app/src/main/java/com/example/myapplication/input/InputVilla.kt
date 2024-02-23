@@ -5,10 +5,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Toast
 import com.example.myapplication.databinding.ActivityInputVillaBinding
-import com.example.myapplication.model.FormDetailProperti
-import com.example.myapplication.model.FormProperti
-import java.io.Serializable
 
 class InputVilla : AppCompatActivity() {
     private lateinit var binding: ActivityInputVillaBinding
@@ -26,32 +25,48 @@ class InputVilla : AppCompatActivity() {
         val akses_jalan = resources.getStringArray(com.example.myapplication.R.array.jalan)
         val menghadap = resources.getStringArray(com.example.myapplication.R.array.menghadap)
 
-        val dataTemp = intent.extras?.get("temp") as FormProperti
+        val dataTempo = getSharedPreferences("dataTemp", MODE_PRIVATE)
+        val oldData = getSharedPreferences("property_data", MODE_PRIVATE)
+        val idOld = oldData.getString("property_id", null)
 
         with(binding){
+            if (idOld != null) {
+                val luasbangunan = oldData.getString("property_luasBangunan", null)
+                val jmlkamar = oldData.getString("property_jmlKamar", null)
+                val jmlkamarmandi = oldData.getString("property_jmlKamarMandi", null)
+
+                luasBangunan.setText(luasbangunan)
+                kamar.setText(jmlkamar)
+                kamarMandi.setText(jmlkamarmandi)
+            }
+
             btnNext.setOnClickListener {
-                var detailTemp = FormDetailProperti()
+                if (harga.text.isEmpty()) {
+                    Toast.makeText(this@InputVilla, "Masukkan harga jual villa", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
 
-                detailTemp.deskripsi = deskripsi.text.toString()
-                detailTemp.luasTanah = luasTanah.text.toString().toInt()
-                detailTemp.luasBangunan = luasBangunan.text.toString().toInt()
-                detailTemp.jmlKamar = kamar.text.toString().toInt()
-                detailTemp.jmlKamarMandi = kamarMandi.text.toString().toInt()
-                detailTemp.jmlLantai = jmlLantai.text.toString().toInt()
-                detailTemp.tahunDibangun = tahunDibangun.text.toString().toInt()
-                detailTemp.harga = harga.text.toString().toInt()
-                detailTemp.tempatParkir = tempatParkir.selectedItem.toString()
-                detailTemp.tipeHarga = tipeHarga.selectedItem.toString()
-                detailTemp.dayaListrik = dayaListrik.selectedItem.toString()
-                detailTemp.kondisi = kondisiSpinner.selectedItem.toString()
-                detailTemp.tipeAir = tipeAir.selectedItem.toString()
-                detailTemp.interior = interiorSpinner.selectedItem.toString()
-                detailTemp.aksesJalan = aksesJalan.selectedItem.toString()
-                detailTemp.menghadap = menghadapSpinner.selectedItem.toString()
+                with(dataTempo.edit()) {
+                    putString("detail_deskripsi", deskripsi.text.toString())
+                    putInt("detail_luasTanah", parseToInt(luasTanah))
+                    putInt("detail_luasBangunan", parseToInt(luasBangunan))
+                    putInt("detail_jmlKamar", parseToInt(kamar))
+                    putInt("detail_jmlKamarMandi", parseToInt(kamarMandi))
+                    putInt("detail_jmlLantai", parseToInt(jmlLantai))
+                    putInt("detail_harga", parseToInt(harga))
+                    putInt("detail_tahunDibangun", parseToInt(tahunDibangun))
+                    putString("detail_tempatParkir", tempatParkir.selectedItem.toString())
+                    putString("detail_tipeHarga", tipeHarga.selectedItem.toString())
+                    putString("detail_dayaListrik", dayaListrik.selectedItem.toString())
+                    putString("detail_kondisi", kondisiSpinner.selectedItem.toString())
+                    putString("detail_tipeAir", tipeAir.selectedItem.toString())
+                    putString("detail_interior", interiorSpinner.selectedItem.toString())
+                    putString("detail_aksesJalan", aksesJalan.selectedItem.toString())
+                    putString("detail_menghadap", menghadapSpinner.selectedItem.toString())
+                    commit()
+                }
 
-                dataTemp.detailProperti = detailTemp
                 val intentToInputVideo = Intent(this@InputVilla, InputVideo::class.java)
-                intentToInputVideo.putExtra("temp", dataTemp as Serializable)
                 startActivity(intentToInputVideo)
             }
 
@@ -106,6 +121,14 @@ class InputVilla : AppCompatActivity() {
                 menghadap)
             menghadapAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             menghadapSpinner.adapter = jalanAdapter
+        }
+    }
+
+    private fun parseToInt(editText: EditText) : Int {
+        return if (editText.text.isEmpty()) {
+            0
+        } else {
+            editText.text.toString().toInt()
         }
     }
 }

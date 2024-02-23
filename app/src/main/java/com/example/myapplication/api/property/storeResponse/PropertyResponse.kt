@@ -1,13 +1,23 @@
-package com.example.myapplication.api.property
+package com.example.myapplication.api.property.storeResponse
 
 import com.example.myapplication.api.models.DefaultResponse
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class PropertiesResponse : DefaultResponse() {
+class PropertyResponse : DefaultResponse() {
     @SerializedName("data")
     @Expose
-    var data : List <Property> ?= null
+    var data : Datas ?= null
+
+    class Datas {
+        @SerializedName("properties")
+        @Expose
+        var properties : List<Property> ?= null
+
+        @SerializedName("pagination")
+        @Expose
+        var pagination: Pagination? = null
+    }
 
     class Property {
         @SerializedName("id")
@@ -83,5 +93,57 @@ class PropertiesResponse : DefaultResponse() {
         @SerializedName("updated_at")
         @Expose
         var updated_at: String? = null
+    }
+
+    class Pagination {
+        @SerializedName("current_page")
+        @Expose
+        var current_page : Int? = 0
+
+        @SerializedName("total")
+        @Expose
+        var total : Int? = 0
+
+        @SerializedName("per_page")
+        @Expose
+        var per_page : Int? = 0
+
+        @SerializedName("last_page")
+        @Expose
+        var last_page : Int? = 0
+
+        @SerializedName("next_page_url")
+        @Expose
+        var next_page_url : String? = null
+
+        @SerializedName("prev_page_url")
+        @Expose
+        var prev_page_url : String? = null
+
+        @SerializedName("first_page_url")
+        @Expose
+        var first_page_url : String? = null
+
+        @SerializedName("last_page_url")
+        @Expose
+        var last_page_url : String? = null
+
+        @SerializedName("links")
+        @Expose
+        var links : List<Links>? = null
+
+        class Links {
+            @SerializedName("url")
+            @Expose
+            var url : String? = null
+
+            @SerializedName("label")
+            @Expose
+            var label : String? = null
+
+            @SerializedName("active")
+            @Expose
+            var active : String? = null
+        }
     }
 }

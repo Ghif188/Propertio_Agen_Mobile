@@ -1,6 +1,7 @@
 package com.example.myapplication.input
 
 import android.content.Intent
+import android.graphics.ImageDecoder
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityInputVideoBinding
@@ -31,7 +33,7 @@ class InputVideo : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val dataTemp = intent.extras?.get("temp") as FormProperti
+        val dataTempo = getSharedPreferences("dataTemp", MODE_PRIVATE)
 
         with(binding){
             btnUploadImg.setOnClickListener {
@@ -43,10 +45,42 @@ class InputVideo : AppCompatActivity() {
             }
 
             btnNext.setOnClickListener {
-                dataTemp.namaVirtualTour = namaVirtualTour.text.toString()
-                dataTemp.linkVideo = linkVideo.text.toString()
-                dataTemp.linkVirtualTour = linkVirtualTour.text.toString()
-                dataTemp.fotoProperti = listOf(FormFoto())
+                if (imageContainer.childCount == 1) {
+                    Toast.makeText(this@InputVideo, "Masukkan foto terlebih dahulu", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                val imageInfoList = mutableListOf<Map<String, Any?>>()
+
+                for (i in 1 until imageContainer.childCount) {
+                    val containerLayout = imageContainer.getChildAt(i) as LinearLayout
+                    val captionEditText = containerLayout.getChildAt(1) as EditText
+
+                    val imageInfo = mapOf(
+                        "uri" to selectedImageUri,
+                        "caption" to captionEditText.text.toString()
+                    )
+
+                    imageInfoList.add(imageInfo)
+                }
+
+                val formFotoList = imageInfoList.map { imageInfo ->
+                    FormFoto(
+                        image = imageInfo["uri"]?.toString(),
+                        status = "",
+                        cation = imageInfo["caption"]?.toString()
+                    )
+                }
+
+                with(dataTempo.edit()) {
+                    putString("namaVirtualTour", namaVirtualTour.text.toString())
+                    putString("linkVideo", linkVideo.text.toString())
+                    putString("linkVirtualTour", linkVirtualTour.text.toString())
+                    commit()
+                }
+
+                val dataTemp = FormProperti()
+                dataTemp.fotoProperti = formFotoList
                 val intentToInputFasilitas = Intent(this@InputVideo, InputFasilitasProperti::class.java)
                 intentToInputFasilitas.putExtra("temp", dataTemp as Serializable)
                 startActivity(intentToInputFasilitas)

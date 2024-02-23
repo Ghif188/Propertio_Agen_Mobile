@@ -3,9 +3,11 @@ package com.example.myapplication.model
 import java.io.Serializable
 
 data class FormProperti (
+    var id: Int? = 0,
     var beritaProperti: String? ="",
     var judulProperti: String? ="",
     var tipeProperti: String? ="",
+    var tipePropertiTeks: String? = "",
     var tipeSertifikat: String? ="",
     var tipeIklan: String? ="",
     var provinsi: String? ="",

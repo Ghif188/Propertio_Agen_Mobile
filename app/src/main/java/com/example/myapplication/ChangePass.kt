@@ -15,12 +15,10 @@ class ChangePass : AppCompatActivity() {
         setContentView(binding.root)
         with(binding){
             btnBack.setOnClickListener{
-                val intentToInputLokasi = Intent(this@ChangePass, MainActivity::class.java)
-                startActivity(intentToInputLokasi)
+                finish()
             }
             btnBatal.setOnClickListener{
-                val intentToInputLokasi = Intent(this@ChangePass, MainActivity::class.java)
-                startActivity(intentToInputLokasi)
+                finish()
             }
         }
     }

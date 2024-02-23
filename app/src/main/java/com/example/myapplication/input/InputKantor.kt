@@ -5,10 +5,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Toast
 import com.example.myapplication.databinding.ActivityInputKantorBinding
-import com.example.myapplication.model.FormDetailProperti
-import com.example.myapplication.model.FormProperti
-import java.io.Serializable
 
 class InputKantor : AppCompatActivity() {
     private lateinit var binding: ActivityInputKantorBinding
@@ -26,32 +25,77 @@ class InputKantor : AppCompatActivity() {
         val interior = resources.getStringArray(com.example.myapplication.R.array.interior)
         val akses_jalan = resources.getStringArray(com.example.myapplication.R.array.jalan)
 
-        val dataTemp = intent.extras?.get("temp") as FormProperti
+        val dataTempo = getSharedPreferences("dataTemp", MODE_PRIVATE)
+        val oldData = getSharedPreferences("property_data", MODE_PRIVATE)
+        val idOld = oldData.getString("property_id", null)
 
         with(binding){
+            if (idOld != null) {
+                val luasbangunan = oldData.getString("property_luasBangunan", null)
+                val jmlkamar = oldData.getString("property_jmlKamar", null)
+                val jmlkamarmandi = oldData.getString("property_jmlKamarMandi", null)
+
+                luasBangunan.setText(luasbangunan)
+                kamar.setText(jmlkamar)
+                kamarMandi.setText(jmlkamarmandi)
+            }
+
             btnNext.setOnClickListener {
-                var detailTemp = FormDetailProperti()
+                if (deskripsi.text.isEmpty()) {
+                    Toast.makeText(this@InputKantor, "Masukkan deskripsi kantor", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
 
-                detailTemp.deskripsi = deskripsi.text.toString()
-                detailTemp.luasTanah = luasTanah.text.toString().toInt()
-                detailTemp.luasBangunan = luasBangunan.text.toString().toInt()
-                detailTemp.jmlKamar = kamar.text.toString().toInt()
-                detailTemp.jmlKamarMandi = kamarMandi.text.toString().toInt()
-                detailTemp.jmlLantai = jmlLantai.text.toString().toInt()
-                detailTemp.tahunDibangun = tahunDibangun.text.toString().toInt()
-                detailTemp.harga = harga.text.toString().toInt()
-                detailTemp.tempatParkir = tempatParkir.selectedItem.toString()
-                detailTemp.posisi = posisiSpinner.selectedItem.toString()
-                detailTemp.tipeHarga = tipeHarga.selectedItem.toString()
-                detailTemp.dayaListrik = dayaListrik.selectedItem.toString()
-                detailTemp.kondisi = kondisiSpinner.selectedItem.toString()
-                detailTemp.tipeAir = tipeAir.selectedItem.toString()
-                detailTemp.interior = interiorSpinner.selectedItem.toString()
-                detailTemp.aksesJalan = aksesJalan.selectedItem.toString()
+                if (luasTanah.text.isEmpty()) {
+                    Toast.makeText(this@InputKantor, "Masukkan luas tanah", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
 
-                dataTemp.detailProperti = detailTemp
+                if (luasBangunan.text.isEmpty()) {
+                    Toast.makeText(this@InputKantor, "Masukkan luas bangunan", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (jmlLantai.text.isEmpty()) {
+                    Toast.makeText(this@InputKantor, "Masukkan jumlah lantai", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (kamar.text.isEmpty()) {
+                    Toast.makeText(this@InputKantor, "Masukkan jumlah kamar", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (tahunDibangun.text.isEmpty()) {
+                    Toast.makeText(this@InputKantor, "Masukkan tahun dibangun kantor", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (harga.text.isEmpty()) {
+                    Toast.makeText(this@InputKantor, "Masukkan harga kantor", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                with(dataTempo.edit()) {
+                    putString("detail_deskripsi", deskripsi.text.toString())
+                    putInt("detail_luasTanah", parseToInt(luasTanah))
+                    putInt("detail_luasBangunan", parseToInt(luasBangunan))
+                    putInt("detail_jmlKamar", parseToInt(kamar))
+                    putInt("detail_jmlKamarMandi", parseToInt(kamarMandi))
+                    putInt("detail_jmlLantai", parseToInt(jmlLantai))
+                    putInt("detail_harga", parseToInt(harga))
+                    putInt("detail_tahunDibangun", parseToInt(tahunDibangun))
+                    putString("detail_tempatParkir", tempatParkir.selectedItem.toString())
+                    putString("detail_tipeHarga", tipeHarga.selectedItem.toString())
+                    putString("detail_dayaListrik", dayaListrik.selectedItem.toString())
+                    putString("detail_kondisi", kondisiSpinner.selectedItem.toString())
+                    putString("detail_tipeAir", tipeAir.selectedItem.toString())
+                    putString("detail_interior", interiorSpinner.selectedItem.toString())
+                    putString("detail_aksesJalan", aksesJalan.selectedItem.toString())
+                    commit()
+                }
+
                 val intentToInputVideo = Intent(this@InputKantor, InputVideo::class.java)
-                intentToInputVideo.putExtra("temp", dataTemp as Serializable)
                 startActivity(intentToInputVideo)
             }
 
@@ -106,6 +150,14 @@ class InputKantor : AppCompatActivity() {
                 akses_jalan)
             jalanAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             aksesJalan.adapter = jalanAdapter
+        }
+    }
+
+    private fun parseToInt(editText: EditText) : Int {
+        return if (editText.text.isEmpty()) {
+            0
+        } else {
+            editText.text.toString().toInt()
         }
     }
 }

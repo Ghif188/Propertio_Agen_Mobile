@@ -5,12 +5,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import com.example.myapplication.input.InputLokasi
-import com.example.myapplication.input.InputVideo
+import android.widget.EditText
+import android.widget.Toast
 import com.example.myapplication.databinding.ActivityInputGudangBinding
-import com.example.myapplication.model.FormDetailProperti
-import com.example.myapplication.model.FormProperti
-import java.io.Serializable
 
 class InputGudang : AppCompatActivity() {
     private lateinit var binding: ActivityInputGudangBinding
@@ -25,25 +22,60 @@ class InputGudang : AppCompatActivity() {
         val kondisi = resources.getStringArray(com.example.myapplication.R.array.kondisi)
         val akses_jalan = resources.getStringArray(com.example.myapplication.R.array.jalan)
 
-        val dataTemp = intent.extras?.get("temp") as FormProperti
+        val dataTempo = getSharedPreferences("dataTemp", MODE_PRIVATE)
+        val oldData = getSharedPreferences("property_data", MODE_PRIVATE)
+        val idOld = oldData.getString("property_id", null)
+
         with(binding){
+            if (idOld != null) {
+                val luasbangunan = oldData.getString("property_luasBangunan", null)
+                val jmlkamar = oldData.getString("property_jmlKamar", null)
+                val jmlkamarmandi = oldData.getString("property_jmlKamarMandi", null)
+
+                luasBangunan.setText(luasbangunan)
+            }
+
             btnNext.setOnClickListener {
-                var detailTemp = FormDetailProperti()
+                if (deskripsi.text.isEmpty()) {
+                    Toast.makeText(this@InputGudang, "Masukkan deskripsi gudang", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
 
-                detailTemp.deskripsi = deskripsi.text.toString()
-                detailTemp.luasTanah = luasTanah.text.toString().toInt()
-                detailTemp.luasBangunan = luasBangunan.text.toString().toInt()
-                detailTemp.tempatParkir = tempatParkir.selectedItem.toString()
-                detailTemp.tahunDibangun = tahunDibangun.text.toString().toInt()
-                detailTemp.harga = harga.text.toString().toInt()
-                detailTemp.tipeHarga = tipeHarga.selectedItem.toString()
-                detailTemp.dayaListrik = dayaListrik.selectedItem.toString()
-                detailTemp.kondisi = kondisiSpinner.selectedItem.toString()
-                detailTemp.aksesJalan = aksesJalan.selectedItem.toString()
+                if (luasTanah.text.isEmpty()) {
+                    Toast.makeText(this@InputGudang, "Masukkan luas tanah gudang", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
 
-                dataTemp.detailProperti = detailTemp
+                if (luasBangunan.text.isEmpty()) {
+                    Toast.makeText(this@InputGudang, "Masukkan luas bangunan gudang", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (tahunDibangun.text.isEmpty()) {
+                    Toast.makeText(this@InputGudang, "Masukkan tahun dibangun gudang", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (harga.text.isEmpty()) {
+                    Toast.makeText(this@InputGudang, "Masukkan harga gudang", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                with(dataTempo.edit()) {
+                    putString("detail_deskripsi", deskripsi.text.toString())
+                    putInt("detail_luasTanah", parseToInt(luasTanah))
+                    putInt("detail_luasBangunan", parseToInt(luasBangunan))
+                    putString("detail_tempatParkir", tempatParkir.selectedItem.toString())
+                    putInt("detail_tahunDibangun", parseToInt(tahunDibangun))
+                    putInt("detail_harga", parseToInt(harga))
+                    putString("detail_tipeHarga", tipeHarga.selectedItem.toString())
+                    putString("detail_dayaListrik", dayaListrik.selectedItem.toString())
+                    putString("detail_kondisi", kondisiSpinner.selectedItem.toString())
+                    putString("detail_aksesJalan", aksesJalan.selectedItem.toString())
+                    commit()
+                }
+
                 val intentToInputVideo = Intent(this@InputGudang, InputVideo::class.java)
-                intentToInputVideo.putExtra("temp", dataTemp as Serializable)
                 startActivity(intentToInputVideo)
             }
 
@@ -80,6 +112,14 @@ class InputGudang : AppCompatActivity() {
                 akses_jalan)
             jalanAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             aksesJalan.adapter = jalanAdapter
+        }
+    }
+
+    private fun parseToInt(editText: EditText) : Int {
+        return if (editText.text.isEmpty()) {
+            0
+        } else {
+            editText.text.toString().toInt()
         }
     }
 }

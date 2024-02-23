@@ -46,7 +46,6 @@ class Login : AppCompatActivity() {
                 }
                 login()
             }
-            // hanya untuk developer
             btnLoginDev.setOnClickListener{
                 login("agent@mail.com", "11111111")
             }

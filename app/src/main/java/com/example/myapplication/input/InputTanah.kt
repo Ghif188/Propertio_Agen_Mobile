@@ -5,10 +5,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Toast
 import com.example.myapplication.databinding.ActivityInputTanahBinding
-import com.example.myapplication.model.FormDetailProperti
-import com.example.myapplication.model.FormProperti
-import java.io.Serializable
 
 class InputTanah : AppCompatActivity() {
     private lateinit var binding: ActivityInputTanahBinding
@@ -20,21 +19,27 @@ class InputTanah : AppCompatActivity() {
         val tipe_harga = resources.getStringArray(com.example.myapplication.R.array.tipe_harga)
         val akses_jalan = resources.getStringArray(com.example.myapplication.R.array.jalan)
 
-        val dataTemp = intent.extras?.get("temp") as FormProperti
+        val dataTempo = getSharedPreferences("dataTemp", MODE_PRIVATE)
+        val oldData = getSharedPreferences("property_data", MODE_PRIVATE)
+        val idOld = oldData.getString("property_id", null)
 
         with(binding){
-            var detailTemp = FormDetailProperti()
-
-            detailTemp.deskripsi = deskripsi.text.toString()
-            detailTemp.luasTanah = luasTanah.text.toString().toInt()
-            detailTemp.harga = harga.text.toString().toInt()
-            detailTemp.tipeHarga = tipeHarga.selectedItem.toString()
-            detailTemp.aksesJalan = aksesJalan.selectedItem.toString()
-
-            dataTemp.detailProperti = detailTemp
             btnNext.setOnClickListener {
+                if (harga.text.isEmpty()) {
+                    Toast.makeText(this@InputTanah, "Masukkan harga jual tanah", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                with(dataTempo.edit()) {
+                    putString("detail_deskripsi", deskripsi.text.toString())
+                    putInt("detail_luasTanah", parseToInt(luasTanah))
+                    putInt("detail_harga", parseToInt(harga))
+                    putString("detail_tipeHarga", tipeHarga.selectedItem.toString())
+                    putString("detail_aksesJalan", aksesJalan.selectedItem.toString())
+                    commit()
+                }
+
                 val intentToInputVideo = Intent(this@InputTanah, InputVideo::class.java)
-                intentToInputVideo.putExtra("temp", dataTemp as Serializable)
                 startActivity(intentToInputVideo)
             }
 
@@ -53,6 +58,14 @@ class InputTanah : AppCompatActivity() {
                 akses_jalan)
             jalanAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             aksesJalan.adapter = jalanAdapter
+        }
+    }
+
+    private fun parseToInt(editText: EditText) : Int {
+        return if (editText.text.isEmpty()) {
+            0
+        } else {
+            editText.text.toString().toInt()
         }
     }
 }

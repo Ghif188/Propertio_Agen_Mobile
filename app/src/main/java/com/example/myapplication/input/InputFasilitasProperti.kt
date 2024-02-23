@@ -5,10 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.myapplication.DetailProperti
-import com.example.myapplication.Fasilitas
+import com.example.myapplication.model.Fasilitas
 import com.example.myapplication.FasilitasAdapter
 import com.example.myapplication.api.Retrofit
 import com.example.myapplication.api.admin.TypeProperty
